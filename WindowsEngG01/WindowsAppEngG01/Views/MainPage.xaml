@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="WindowsAppEngG01.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WindowsAppEngG01"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:datamodel="using:SharedLib"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <NavigationView
+        x:Name="nvTopLevelNav"
+        Loaded="NvTopLevelNav_Loaded"
+        Margin="0,12,0,0"
+        SelectionChanged="NvTopLevelNav_SelectionChanged"
+        ItemInvoked="NvTopLevelNav_ItemInvoked"
+        IsTabStop="False">
+        <NavigationView.MenuItems>
+            <NavigationViewItem Icon="Home" Tag="Home_Page">
+                <TextBlock Tag="Nav_Home">Home</TextBlock>
+            </NavigationViewItem>
+            <NavigationViewItem Icon="Filter" Tag="Notifications_Page">
+                <TextBlock Tag="Nav_Notifications">Notifications</TextBlock>
+            </NavigationViewItem>
+            <NavigationViewItem Icon="Filter" Tag="Search_Page">
+                <TextBlock Tag="Nav_Search">Search</TextBlock>
+            </NavigationViewItem>
+            <NavigationViewItem Icon="Admin" Tag="Dashboard_Page">
+                <TextBlock Tag="Nav_Dashboard">Dashboard</TextBlock>
+            </NavigationViewItem>
+            <NavigationViewItem Icon="AddFriend" Tag="Account_Page">
+                <TextBlock Tag="Nav_Account">Account</TextBlock>
+            </NavigationViewItem>
+        </NavigationView.MenuItems>
+        <Frame x:Name="contentFrame"
+               x:FieldModifier="public"></Frame>
+    </NavigationView>
+</Page>
