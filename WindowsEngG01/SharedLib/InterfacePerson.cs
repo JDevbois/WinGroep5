@@ -16,5 +16,6 @@ namespace SharedLib
         public String PostalCode { get; set; }
         public String Street { get; set; }
         public String Number { get; set; }
+        public String Password { get; set; }
     }
 }

@@ -13,7 +13,5 @@ namespace Backend.Data
         {
             _context = context;
         }
-
-
     }
 }

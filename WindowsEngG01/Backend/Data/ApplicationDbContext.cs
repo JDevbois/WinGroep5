@@ -10,22 +10,25 @@ namespace Backend.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public virtual DbSet<Company> Company { get; set; }
-        public virtual DbSet<Event> Event { get; set; }
-        public virtual DbSet<Merchant> Merchant { get; set; }
-        public virtual DbSet<Promotion> Promotion { get; set; }
-        public virtual DbSet<User> User { get; set; }
-
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Merchant> Merchants { get; set; }
+        public virtual DbSet<Promotion> Promotions { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         public ApplicationDbContext()
         {
-
+            PopulateDataBase();
         }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         { }
 
+        private void PopulateDataBase()
+        {
+            // TODO
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -54,8 +57,6 @@ namespace Backend.Data
                  .IsUnicode(false)
                  .ValueGeneratedNever();
 
-
-
                 entity.Property(c => c.Number)
                     .HasColumnName("Number")
                     .HasMaxLength(255)
@@ -67,7 +68,6 @@ namespace Backend.Data
                      .HasMaxLength(255)
                       .IsUnicode(false)
                      .ValueGeneratedNever();
-
 
                 entity.Property(c => c.Street)
                    .HasColumnName("Street")
@@ -132,8 +132,6 @@ namespace Backend.Data
                     .HasColumnName("EndDate")
                     .HasMaxLength(255)
                     .IsUnicode(false);
-
-
             });
 
             modelBuilder.Entity<Merchant>(entity =>
@@ -185,7 +183,6 @@ namespace Backend.Data
              .WithOne()
              .IsRequired()
              .OnDelete(DeleteBehavior.Cascade);
-
             });
 
             modelBuilder.Entity<Promotion>(entity =>
@@ -217,7 +214,6 @@ namespace Backend.Data
                   .HasColumnName("EndDate")
                   .HasMaxLength(255)
                   .IsUnicode(false);
-
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -269,7 +265,6 @@ namespace Backend.Data
              .WithOne()
              .IsRequired()
              .OnDelete(DeleteBehavior.Cascade);
-
             });
 
             modelBuilder.Entity<Event>(entity =>
@@ -282,7 +277,6 @@ namespace Backend.Data
                     .HasMaxLength(255)
                     .IsUnicode(false);
             });
-
         }
     }
 }

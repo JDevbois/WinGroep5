@@ -7,8 +7,49 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Hub Header="Dashboard" SectionHeaderClick="Hub_SectionHeaderClick">
+        <HubSection Width="300" Header="Companies">
+            <DataTemplate>
+                <StackPanel>
+                    <GridView x:Name="lvCompanies" ItemsSource="{Binding Companies}" SelectionChanged="LvCompanies_SelectionChanged">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Height="100" Width="100" Orientation="Vertical" Background="CadetBlue">
+                                    <Image Source="{Binding Logo}" Height="70" Width="70" VerticalAlignment="Center" Margin="5" Stretch="UniformToFill" />
+                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                    <StackPanel x:Name="stpAddCompany" Height="100" Width="100" Orientation="Vertical" Background="CadetBlue" Tapped="StpAddCompany_Tapped">
+                        <TextBlock Text="Add Company" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                        <Image />
+                    </StackPanel>
+                </StackPanel>
+            </DataTemplate>
+        </HubSection>
 
-    <Grid>
+        <HubSection x:Name="Tech" Header="Details" IsHeaderInteractive="True"  
+        Background="#F4F4F4" MinWidth="600">
+            <DataTemplate>
+                <Grid>
+                    
+                </Grid>
+            </DataTemplate>
+        </HubSection>
 
-    </Grid>
+        <HubSection x:Name="Sports" Header="Promotions" IsHeaderInteractive="True" 
+        Background="#F9F9F9" MinWidth="300">
+            <DataTemplate>
+                <Grid>
+                    
+                </Grid>
+            </DataTemplate>
+        </HubSection>
+    </Hub>
 </Page>

@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WindowsAppEngG01.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,9 +23,12 @@ namespace WindowsAppEngG01.Views
     /// </summary>
     public sealed partial class RegisterPage : Page
     {
+        public RegisterViewModel ViewModel = new RegisterViewModel();
+
         public RegisterPage()
         {
             this.InitializeComponent();
+            this.DataContext = ViewModel;
         }
     }
 }

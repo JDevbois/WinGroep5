@@ -18,7 +18,5 @@ namespace SharedLib
         public String Type { get; set; }
         public String Website { get; set; }
         public Uri Logo { get; set; }
-        public int MerchantID { get; set; }
-        public virtual Merchant Merchant { get; set; }
     }
 }

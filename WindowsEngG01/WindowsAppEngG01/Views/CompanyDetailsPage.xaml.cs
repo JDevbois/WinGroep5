@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -12,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WindowsAppEngG01.DataManagers;
 using WindowsAppEngG01.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -21,21 +23,26 @@ namespace WindowsAppEngG01.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class LoginPage : Page
+    public sealed partial class CompanyDetailsPage : Page
     {
-        public LoginViewModel viewModel = new LoginViewModel();
 
-        public LoginPage()
+        private CompanyDetails CompanyDetails = new CompanyDetails();
+
+        public CompanyDetailsPage()
         {
             this.InitializeComponent();
-            this.DataContext = viewModel;
         }
 
-        #region txtRegister eventhandlers
-        private void TxtRegister_Tapped(object sender, TappedRoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(RegisterPage));
+            base.OnNavigatedTo(e);
+            var id = (int)e.Parameter;
+            CompanyDetails.Company = new CompanyManager().FindCompanyById(id);
+            Debug.WriteLine("company name: " + CompanyDetails.Company.Name);
+            Debug.WriteLine("company id: " + CompanyDetails.Company.Id);
+            this.DataContext = CompanyDetails;
         }
-        #endregion
+
+
     }
 }

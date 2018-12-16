@@ -18,6 +18,7 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <PackageCertificateKeyFile>WindowsAppEngG01_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>66993BB2992040D4219092CB51598068946CB477</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -120,13 +121,21 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="DataManagers\CompanyManager.cs" />
     <Compile Include="DataManagers\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\BooleanToVisibilityConverter.cs" />
+    <Compile Include="ViewModels\CompanyDetails.cs" />
+    <Compile Include="ViewModels\DashBoardViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="Views\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CompanyDetailsPage.xaml.cs">
+      <DependentUpon>CompanyDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DashboardPage.xaml.cs">
       <DependentUpon>DashboardPage.xaml</DependentUpon>
@@ -160,6 +169,7 @@
     <None Include="WindowsAppEngG01_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\santa-clause-in-costume-carrying-sack_1262-15966.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -175,6 +185,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Views\AccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CompanyDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,6 +228,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>5.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

@@ -16,10 +16,12 @@ namespace WindowsAppEngG01.ViewModels
     public class LoginViewModel : INotifyPropertyChanged
     {
         private string _email;
+
         public string Email {
             get { return _email; }
-            set { _email = value; NotifyPropertyChanged("Email"); }
+            set { _email = value; NotifyPropertyChanged(nameof(Email)); }
         }
+
         public bool IsAuthenticated { get; set; }
         public DelegateCommand LoginCommand { get; set; }
         public DelegateCommand LogoutCommand { get; set; }
@@ -48,8 +50,7 @@ namespace WindowsAppEngG01.ViewModels
                 Email = string.Empty;
                 passwordBox.Password = string.Empty;
 
-                ((Window.Current.Content as Frame).Content as MainPage).contentFrame.Navigate(typeof(AccountPage));
-
+                ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AccountPage));
             } catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
@@ -63,16 +64,14 @@ namespace WindowsAppEngG01.ViewModels
 
         public void Logout(object parameter)
         {
-
             try
             {
-                UserManager.LogOut();
+                new UserManager().LogOut();
                 IsAuthenticated = UserManager.IsUserLoggedIn();
 
                 NotifyPropertyChanged("IsAuthenticated");
                 LoginCommand.RaiseCanExecuteChanged();
                 LogoutCommand.RaiseCanExecuteChanged();
-
             }
             catch (Exception e)
             {
@@ -90,8 +89,7 @@ namespace WindowsAppEngG01.ViewModels
 
         private void NotifyPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
         <TextBlock Text="E-mail:" Grid.Row="0" Grid.Column="0" />
         <TextBlock Text="Password:" Grid.Row="1" Grid.Column="0" />
-        <TextBox Text="{Binding Email}" Grid.Row="0" Grid.Column="1" />
+        <TextBox Text="{Binding Email, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" />
         <PasswordBox x:Name="passwordBox" Grid.Row="1" Grid.Column="1" />
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
             
