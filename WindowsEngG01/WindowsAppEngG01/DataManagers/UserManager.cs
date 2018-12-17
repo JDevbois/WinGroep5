@@ -16,7 +16,7 @@ namespace WindowsAppEngG01.DataManagers
                 new User
                 {
                     Id = 1,
-                    Email = "joren@heimdal.be",
+                    Email = "Joren@heimdal.be",
                     Password = "aa",
                     Subscriptions = new CompanyManager().GetCompanies()
                 },

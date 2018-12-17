@@ -7,16 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Hub Header="Dashboard" SectionHeaderClick="Hub_SectionHeaderClick">
+    <Hub Header="Dashboard">
         <HubSection Width="300" Header="Companies">
             <DataTemplate>
                 <StackPanel>
-                    <GridView x:Name="lvCompanies" ItemsSource="{Binding Companies}" SelectionChanged="LvCompanies_SelectionChanged">
+                    <GridView x:Name="LvCompanies" ItemsSource="{Binding Companies, Mode=TwoWay}" SelectionChanged="LvCompanies_SelectionChanged">
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Height="100" Width="100" Orientation="Vertical" Background="CadetBlue">
-                                    <Image Source="{Binding Logo}" Height="70" Width="70" VerticalAlignment="Center" Margin="5" Stretch="UniformToFill" />
-                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" />
+                                    <Image Source="{Binding Logo, Mode=TwoWay}" Height="70" Width="70" VerticalAlignment="Center" Margin="5" Stretch="UniformToFill" />
+                                    <TextBlock Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" />
                                 </StackPanel>
                             </DataTemplate>
                         </GridView.ItemTemplate>
@@ -26,28 +26,86 @@
                             </ItemsPanelTemplate>
                         </GridView.ItemsPanel>
                     </GridView>
-                    <StackPanel x:Name="stpAddCompany" Height="100" Width="100" Orientation="Vertical" Background="CadetBlue" Tapped="StpAddCompany_Tapped">
-                        <TextBlock Text="Add Company" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-                        <Image />
-                    </StackPanel>
+                    <Button x:Name="btnAddCompany" Content="Add Company" Background="CadetBlue" HorizontalAlignment="Stretch" Command="{Binding AddCompanyCommand}" />
                 </StackPanel>
             </DataTemplate>
         </HubSection>
 
-        <HubSection x:Name="Tech" Header="Details" IsHeaderInteractive="True"  
-        Background="#F4F4F4" MinWidth="600">
+        <HubSection x:Name="hubDetails" Header="Details" DataContext="{Binding SelectedCompany, Mode=TwoWay}"
+        Background="#F4F4F4" MinWidth="500">
             <DataTemplate>
-                <Grid>
-                    
+                <Grid MinWidth="300">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Name" Grid.Row="0" Grid.Column="0" Margin="10"/>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}" PlaceholderText="Name" Grid.Row="0"  Grid.Column="1" Margin="10" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
+
+                    <TextBlock Text="Address" Grid.Row="1" Grid.Column="0" Margin="10" Grid.RowSpan="2" VerticalAlignment="Center" />
+                    <TextBox Text="{Binding Street, Mode=TwoWay}" PlaceholderText="Street" Grid.Row="1" Grid.Column="1" Margin="10" />
+                    <TextBox Text="{Binding Number, Mode=TwoWay}" PlaceholderText="Number" Grid.Row="1" Grid.Column="2" Margin="10" />
+                    <TextBox Text="{Binding PostalCode, Mode=TwoWay}" PlaceholderText="Postal Code" Grid.Row="2" Grid.Column="1" Margin="10" />
+                    <TextBox Text="{Binding City, Mode=TwoWay}" PlaceholderText="City" Grid.Row="2" Grid.Column="2" Margin="10" />
+
+                    <TextBlock Text="Opening Hours" Grid.Row="3" Grid.Column="0" Margin="10" TextWrapping="Wrap" />
+                    <TextBox Text="{Binding OpeningHours, Mode=TwoWay}" PlaceholderText="Opening Hours" Grid.Row="3" Grid.Column="1" Margin="10" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
+
+                    <TextBlock Text="Type" Grid.Row="4" Grid.Column="0" Margin="10" />
+                    <ComboBox PlaceholderText="Type" ItemsSource="{Binding AllowedTypes, Mode=OneTime}" Grid.Row="4" Grid.Column="1" Margin="10" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
+
+                    <TextBlock Text="Website" Grid.Row="5" Grid.Column="0" Margin="10" />
+                    <TextBox Text="{Binding Website, Mode=TwoWay}" PlaceholderText="Website" Grid.Row="5" Grid.Column="1" Margin="10" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
+
+                    <TextBlock Text="Logo" Grid.Row="6" Grid.Column="0" Margin="10" />
+                    <TextBox Text="{Binding Logo, Mode=TwoWay}" PlaceholderText="Logo" Grid.Row="6" Grid.Column="1" Margin="10" />
+                    <StackPanel Orientation="Vertical" Grid.Row="6" Grid.Column="2" Margin="10" Grid.RowSpan="2">
+                        <TextBlock Text="Preview" />
+                        <Image Source="{Binding Logo, Mode=TwoWay}" />
+                    </StackPanel>
+
+                    <Button Content="Submit Changes" Grid.Column="2" Grid.Row="8" HorizontalAlignment="Right" Margin="10"/>
                 </Grid>
             </DataTemplate>
         </HubSection>
 
-        <HubSection x:Name="Sports" Header="Promotions" IsHeaderInteractive="True" 
+        <HubSection x:Name="Sports" Header="Promotions"
         Background="#F9F9F9" MinWidth="300">
             <DataTemplate>
                 <Grid>
-                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Add Event" Grid.Row="0" Margin="10" VerticalAlignment="Center" />
+                    <Button Content="+" Grid.Column="1" Margin="10"/>
+
+                    <TextBlock Text="Add Discount Coupon" Grid.Row="1" Margin="10" VerticalAlignment="Center" />
+                    <Button Content="+" Grid.Row="1" Grid.Column="1" Margin="10" />
+
+                    <TextBlock Text="Add Other Promotion" Grid.Row="2" Margin="10" VerticalAlignment="Center" />
+                    <Button Content="+" Grid.Column="1" Grid.Row="2" Margin="10" />
                 </Grid>
             </DataTemplate>
         </HubSection>

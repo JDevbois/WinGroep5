@@ -1,0 +1,14 @@
+﻿<Page
+    x:Class="WindowsAppEngG01.Views.NotLoggedInPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WindowsAppEngG01.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel Height="500">
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30">You are not logged in, this feature is only available to logged in users.</TextBlock>
+    </StackPanel>
+</Page>

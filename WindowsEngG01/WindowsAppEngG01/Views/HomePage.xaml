@@ -22,7 +22,7 @@
         <TextBlock Text="Spotlights" Grid.Row="1" />
         <controls:Carousel
             x:Name="crsSpotlight"
-            ItemsSource="{Binding SpotlightCompanies, Mode=OneWay}"
+            ItemsSource="{Binding SpotlightCompanies, Mode=TwoWay}"
             InvertPositive="True" 
             ItemDepth="200"
             ItemMargin="0" 
@@ -53,7 +53,7 @@
             </controls:Carousel>
         <TextBlock Grid.Row="3" Text="Your Subscriptions" />
         <GridView x:Name="lvSubscriptions"
-                  ItemsSource="{Binding Subscriptions}"
+                  ItemsSource="{Binding Subscriptions, Mode=TwoWay}"
                   SelectionChanged="LvSubscriptions_SelectionChanged"
                   Grid.Row="4"
                   Height="300">

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
+using WindowsAppEngG01.DataManagers;
 using WindowsAppEngG01.ViewModels;
 using WindowsAppEngG01.Views;
 
@@ -63,13 +64,19 @@ namespace WindowsAppEngG01
                             contentFrame.Navigate(typeof(HomePage));
                             break;
                         case "Nav_Notifications":
-                            contentFrame.Navigate(typeof(NotificationsPage));
+                            if (UserManager.IsUserLoggedIn())
+                                contentFrame.Navigate(typeof(NotificationsPage));
+                            else
+                                contentFrame.Navigate(typeof(NotLoggedInPage));
                             break;
                         case "Nav_Search":
                             contentFrame.Navigate(typeof(SearchPage));
                             break;
                         case "Nav_Dashboard":
-                            contentFrame.Navigate(typeof(DashboardPage));
+                            if (UserManager.IsUserLoggedIn())
+                                contentFrame.Navigate(typeof(DashboardPage));
+                            else
+                                contentFrame.Navigate(typeof(NotLoggedInPage));
                             break;
                         case "Nav_Account":
                             if (LoggedIn is false)
