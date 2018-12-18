@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharedLib;
+using WindowsAppEngG01.Utils;
 using WindowsAppEngG01.ViewModels;
 
 namespace WindowsAppEngG01.DataManagers
@@ -62,6 +63,11 @@ namespace WindowsAppEngG01.DataManagers
         public Company FindCompanyById(int id)
         {
             return GetCompanies().First(c => c.Id == id);
+        }
+
+        internal void UpdateCompany(Company company)
+        {
+            _companies.Replace(c => c.Id == company.Id, company);
         }
     }
 }

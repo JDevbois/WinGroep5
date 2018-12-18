@@ -20,6 +20,8 @@ namespace WindowsAppEngG01.ViewModels
 
         public DelegateCommand AddCompanyCommand { get; set; }
 
+        public DelegateCommand SaveChangesCommand { get; set; }
+
         public List<Company> Companies
         {
             get { return _companies; }
@@ -38,18 +40,25 @@ namespace WindowsAppEngG01.ViewModels
         {
             Companies = new CompanyManager().GetCompanies().Where(c => c.UserId == UserManager.LoggedInUser.Id).ToList();
             AddCompanyCommand = new DelegateCommand(AddCompany);
+            SaveChangesCommand = new DelegateCommand(SaveChanges);
         }
 
         private void AddCompany(object parameter)
         {
             new CompanyManager().AddCompany(new Company
             {
+                //TODO
                 UserId = UserManager.LoggedInUser.Id,
                 Name = "Placeholder",
                 Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg")
             });
             Companies = new CompanyManager().GetCompanies().Where(c => c.UserId == UserManager.LoggedInUser.Id).ToList();
             Debug.WriteLine(Companies);
+        }
+
+        private void SaveChanges(object parameter)
+        {
+            new CompanyManager().UpdateCompany((Company)parameter);
         }
 
         #region INotifyPropertyChanged Members

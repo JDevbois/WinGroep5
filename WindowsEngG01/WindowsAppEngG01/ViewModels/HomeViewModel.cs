@@ -36,6 +36,8 @@ namespace WindowsAppEngG01.ViewModels
 
         public User LoggedInUser { get; set; }
 
+        public bool IsLoggedIn { get { return UserManager.IsUserLoggedIn(); } }
+
         private int _selectedSpotlightCompanyId;
 
         public int SelectedSpotlightCompanyId {

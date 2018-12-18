@@ -5,10 +5,13 @@
     xmlns:local="using:WindowsAppEngG01.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:util="using:WindowsAppEngG01.Utils"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Resources>
+        <util:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -18,20 +21,19 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--TODO-->
-        <TextBlock Text="Welcome!" Grid.Row="0"/>
-        <TextBlock Text="Spotlights" Grid.Row="1" />
+        <TextBlock Text="Spotlights" Grid.Row="0" HorizontalAlignment="Stretch" TextAlignment="Center" FontSize="30sp" />
         <controls:Carousel
             x:Name="crsSpotlight"
             ItemsSource="{Binding SpotlightCompanies, Mode=TwoWay}"
             InvertPositive="True" 
-            ItemDepth="200"
+            ItemDepth="50"
             ItemMargin="0" 
             ItemRotationX="0"
             ItemRotationY="45" 
             ItemRotationZ="0"
             Orientation="Horizontal"
-            Height="500"
-            Grid.Row="2">
+            Height="300"
+            Grid.Row="1">
 
             <controls:Carousel.EasingFunction>
                 <CubicEase EasingMode="EaseOut" />
@@ -39,37 +41,39 @@
             <controls:Carousel.ItemTemplate>
                 <DataTemplate>
                     <!-- Carousel content -->
-                    <StackPanel Orientation="Vertical" Height="400" BorderBrush="Black" BorderThickness="20" x:Name="crsItem" Tapped="CrsItem_Tapped" DoubleTapped="CrsItem_DoubleTapped" >
-                        <TextBlock HorizontalTextAlignment="Center" HorizontalAlignment="Stretch"  Text="{Binding Name}"></TextBlock>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" Height="250" BorderBrush="Black" BorderThickness="5" 
+                                x:Name="crsItem" Tapped="CrsItem_Tapped" DoubleTapped="CrsItem_DoubleTapped">
+                        <TextBlock HorizontalAlignment="Center" Text="{Binding Name}"></TextBlock>
                         <Image Source="{Binding Logo}"
-                               Height="300"
-                               Width="400"
-                               Stretch="Uniform"
-                               VerticalAlignment="Bottom"></Image>
-                        
+                               Height="200"
+                               Stretch="Uniform"/>
+
                     </StackPanel>
                 </DataTemplate>
             </controls:Carousel.ItemTemplate>
             </controls:Carousel>
-        <TextBlock Grid.Row="3" Text="Your Subscriptions" />
+        <TextBlock Grid.Row="2" Text="Your Subscriptions"
+                   HorizontalAlignment="Stretch" TextAlignment="Center" FontSize="30sp"
+                   Visibility="{Binding IsLoggedIn, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}" />
         <GridView x:Name="lvSubscriptions"
                   ItemsSource="{Binding Subscriptions, Mode=TwoWay}"
                   SelectionChanged="LvSubscriptions_SelectionChanged"
-                  Grid.Row="4"
-                  Height="300">
+                  Grid.Row="3"
+                  Height="300"
+                  Visibility="{Binding IsLoggedIn, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}">
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel x:Name="lvSubscriptionsItem" 
-                                Orientation="Vertical" Height="200"
-                                DoubleTapped="LvSubscriptionsItem_DoubleTapped">
-                        <TextBlock Text="{Binding Name}"/>
-                        <Image Height="150" Width="200" Stretch="Uniform" VerticalAlignment="Center" Source="{Binding Logo}" />
+                                Orientation="Vertical" Height="180"
+                                DoubleTapped="LvSubscriptionsItem_DoubleTapped" BorderThickness="5" BorderBrush="Black">
+                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center"/>
+                        <Image Height="150" Width="140" Stretch="Uniform" VerticalAlignment="Center" Source="{Binding Logo}" />
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal" />
+                    <ItemsWrapGrid MaximumRowsOrColumns="8" Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </GridView.ItemsPanel>
         </GridView>
