@@ -22,10 +22,10 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Text="Search By" FontSize="30sp" Margin="0,0, 0, 10" HorizontalAlignment="Center" Padding="20" />
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="Name" Margin="0,0, 0, 10" />
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="Type" Margin="0,0, 0, 10" />
-        <TextBlock Grid.Column="0" Grid.Row="3" Text="Has Promotions" Margin="0,0, 0, 10" />
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Text="Search For Companies" FontSize="30sp" Margin="0,0, 0, 10" HorizontalAlignment="Center" Padding="20" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="By Name" Margin="0,0, 0, 10" />
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="By Type Of Company" Margin="0,0, 0, 10" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Only Companies With Running Promotions" Margin="0,0, 0, 10" />
 
         <TextBox Grid.Column="1" Grid.Row="1" Margin="0,0, 0, 10" />
         <ComboBox Grid.Column="1" Grid.Row="2" Margin="0,0, 0, 10" />
