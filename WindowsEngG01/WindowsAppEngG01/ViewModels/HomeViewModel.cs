@@ -38,16 +38,16 @@ namespace WindowsAppEngG01.ViewModels
 
         public bool IsLoggedIn { get { return UserManager.IsUserLoggedIn(); } }
 
-        private int _selectedSpotlightCompanyId;
+        private String _selectedSpotlightCompanyId;
 
-        public int SelectedSpotlightCompanyId {
+        public String SelectedSpotlightCompanyId {
             get { return _selectedSpotlightCompanyId; }
             set { _selectedSpotlightCompanyId = value; NotifyPropertyChanged(nameof(SelectedSpotlightCompanyId)); }
         }
 
-        private int _selectedSubscriptionCompanyId;
+        private String _selectedSubscriptionCompanyId;
 
-        public int SelectedSubscriptionCompanyId
+        public String SelectedSubscriptionCompanyId
         {
             get { return _selectedSubscriptionCompanyId; }
             set { _selectedSubscriptionCompanyId = value; NotifyPropertyChanged(nameof(SelectedSubscriptionCompanyId)); }

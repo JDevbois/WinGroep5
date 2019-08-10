@@ -5,10 +5,14 @@
     xmlns:local="using:WindowsAppEngG01.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:util="using:WindowsAppEngG01.Utils"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <util:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+    </Page.Resources>
     <Hub Header="Dashboard">
-        <HubSection Width="300" Header="Your Companies">
+        <HubSection MinWidth="300" Header="Your Companies">
             <DataTemplate>
                 <StackPanel>
                     <GridView x:Name="LvCompanies" ItemsSource="{Binding Companies, Mode=TwoWay}" SelectionChanged="LvCompanies_SelectionChanged">
@@ -32,7 +36,8 @@
         </HubSection>
 
         <HubSection x:Name="hubDetails" Header="Details"
-        Background="#F4F4F4" MinWidth="500">
+                    Visibility="{Binding CompanySelected, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
+                    Background="#F4F4F4" MinWidth="500">
             <DataTemplate>
                 <StackPanel>
                     <Grid MinWidth="300" DataContext="{Binding SelectedCompany, Mode=TwoWay}">
@@ -87,7 +92,8 @@
         </HubSection>
 
         <HubSection x:Name="Sports" Header="Promotions"
-        Background="#F9F9F9" MinWidth="300">
+                    Visibility="{Binding CompanySelected, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
+                    Background="#F9F9F9" MinWidth="300">
             <DataTemplate>
                 <Grid>
                     <Grid.RowDefinitions>

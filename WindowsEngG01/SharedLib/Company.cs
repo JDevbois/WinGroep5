@@ -6,7 +6,7 @@ namespace SharedLib
 {
     public class Company
     {
-        public int Id { get; set; }
+        public String Id { get; set; }
         public int UserId { get; set; }
         public String Name { get; set; }
         public String City { get; set; }
@@ -24,6 +24,7 @@ namespace SharedLib
 
         public Company()
         {
+            Id = Guid.NewGuid().ToString();
             AllowedTypes = new List<String>
             {
                 "Night Shop",

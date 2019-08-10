@@ -17,6 +17,7 @@ namespace WindowsAppEngG01.ViewModels
     {
         private List<Company> _companies;
         private Company _selectedCompany;
+        private bool _companySelected;
 
         public DelegateCommand AddCompanyCommand { get; set; }
 
@@ -31,29 +32,36 @@ namespace WindowsAppEngG01.ViewModels
         public Company SelectedCompany
         {
             get { return _selectedCompany; }
-            set { _selectedCompany = value; NotifyPropertyChanged(nameof(SelectedCompany)); }
+            set { _selectedCompany = value; CompanySelected = true; NotifyPropertyChanged(nameof(CompanySelected)); NotifyPropertyChanged(nameof(SelectedCompany)); }
         }
 
         public List<String> AllowedTypes { get; set; }
+        public bool CompanySelected { get { return _companySelected;} set { _companySelected = value; NotifyPropertyChanged(nameof(_companySelected)); } }
 
         public DashBoardViewModel()
         {
             Companies = new CompanyManager().GetCompanies().Where(c => c.UserId == UserManager.LoggedInUser.Id).ToList();
             AddCompanyCommand = new DelegateCommand(AddCompany);
             SaveChangesCommand = new DelegateCommand(SaveChanges);
+            SelectedCompany = CreateTempCompany();
+            CompanySelected = false;
         }
 
         private void AddCompany(object parameter)
         {
-            new CompanyManager().AddCompany(new Company
-            {
-                //TODO should be 'empty'
-                UserId = UserManager.LoggedInUser.Id,
-                Name = "Placeholder",
-                Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg")
-            });
+            var temp = CreateTempCompany();
+            new CompanyManager().AddCompany(temp);
             Companies = new CompanyManager().GetCompanies().Where(c => c.UserId == UserManager.LoggedInUser.Id).ToList();
             Debug.WriteLine(Companies);
+        }
+
+        private Company CreateTempCompany()
+        {
+            return new Company
+            {
+                UserId = UserManager.LoggedInUser.Id,
+                Name = "Placeholder"
+            };
         }
 
         private void SaveChanges(object parameter)

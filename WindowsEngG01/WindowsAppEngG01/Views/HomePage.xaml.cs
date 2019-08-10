@@ -32,6 +32,7 @@ namespace WindowsAppEngG01.Views
         {
             this.InitializeComponent();
             this.DataContext = ViewModel;
+            this.crsSpotlight.SelectedIndex = 0;
         }
 
         private void CrsItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)

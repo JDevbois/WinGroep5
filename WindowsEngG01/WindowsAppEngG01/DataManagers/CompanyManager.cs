@@ -16,28 +16,24 @@ namespace WindowsAppEngG01.DataManagers
             {
                 new Company
                 {
-                    Id = 1,
                     UserId = 1,
                     Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
                     Name = "HOGENT"
                 },
                 new Company
                 {
-                    Id = 2,
                     UserId = 2,
                     Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
                     Name = "UGent"
                 },
                 new Company
                 {
-                    Id = 3,
                     UserId = 3,
                     Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
                     Name = "Jos's Delhi"
                 },
                 new Company
                 {
-                    Id = 4,
                     UserId = 1,
                     Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
                     Name = "Heimdal"
@@ -62,13 +58,18 @@ namespace WindowsAppEngG01.DataManagers
 
         public Company FindCompanyById(int id)
         {
-            return GetCompanies().First(c => c.Id == id);
+            return GetCompanies().First(c => c.Id.Equals(id));
         }
 
         internal void UpdateCompany(Company company)
         {
-            //TODO if c.Id = null
-            _companies.Replace(c => c.Id == company.Id, company);
+            if(_companies.FindIndex(c => c.Id == company.Id) >= 0)
+            {
+                _companies.Replace(c => c.Id == company.Id, company);
+            } else
+            {
+                _companies.Add(company);
+            }
         }
     }
 }
