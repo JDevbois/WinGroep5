@@ -19,12 +19,9 @@ namespace WindowsAppEngG01
     {
         private MainViewModel ViewModel { get; set; }
 
-        public bool LoggedIn { get; set; }
-
         public MainPage()
         {
             this.InitializeComponent();
-            LoggedIn = false;
             ViewModel = new MainViewModel();
         }
 
@@ -80,7 +77,7 @@ namespace WindowsAppEngG01
                             break;
                         case "Nav_Account":
                             //TODO doesn't work properly
-                            if (LoggedIn is false)
+                            if (ViewModel.IsAuthenticated is false)
                                 contentFrame.Navigate(typeof(LoginPage));
                             else
                                 contentFrame.Navigate(typeof(AccountPage));
