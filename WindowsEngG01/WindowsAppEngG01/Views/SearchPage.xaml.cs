@@ -32,12 +32,10 @@ namespace WindowsAppEngG01.Views
 
         private void LvSearchResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
 
         private void LvSearchResultsItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-
         }
     }
 }

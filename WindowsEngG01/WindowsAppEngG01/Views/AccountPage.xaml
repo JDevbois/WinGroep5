@@ -9,6 +9,67 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock>Account</TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="3" 
+                   HorizontalAlignment="Center"
+                   Text="Manage Your User Account" 
+                   Padding="20" FontSize="30sp" />
+        
+        <TextBlock Grid.Row="1" Grid.Column="0"
+                   Text="E-mail: "
+                   Margin="10,0,0,10"
+                   FontSize="20"/>
+        <TextBlock Grid.Row="2" Grid.Column="0"
+                   Text="Name: "
+                   Margin="10,0,0,10"
+                   FontSize="20"/>
+        <TextBlock Grid.Row="3" Grid.Column="0"
+                   Text="Address: "
+                   Margin="10,0,0,10"
+                   FontSize="20"/>
+        <TextBlock Grid.Row="5" Grid.Column="0"
+                   Text="Change Password: "
+                   Margin="10,0,0,10"
+                   FontSize="20"/>
+
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,10,30"
+                 Grid.ColumnSpan="2"
+                 PlaceholderText="E-mail" />
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,10,30"
+                 PlaceholderText="First Name"/>
+        <TextBox Grid.Row="2" Grid.Column="2" Margin="0,0,10,30"
+                 PlaceholderText="Last Name"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="0,0,10,10"
+                 PlaceholderText="Street"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Margin="0,0,10,10"
+                 PlaceholderText="Number"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Margin="0,0,10,30"
+                 PlaceholderText="PostalCode"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Margin="0,0,10,30"
+                 PlaceholderText="City"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Margin="0,0,10,10"
+                 PlaceholderText="Enter Old Password"/>
+        <TextBox Grid.Row="5" Grid.Column="2" Margin="0,0,10,10"
+                 PlaceholderText="Enter New Password"/>
+        <TextBox Grid.Row="6" Grid.Column="2" Margin="0,0,10,30"
+                 PlaceholderText="Confirm New Password"/>
+
+        <Button Grid.Row="7" Grid.Column="2" Width="240">Submit Changes</Button>
     </Grid>
 </Page>

@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace WindowsAppEngG01.ViewModels
 {
-    class SearchViewModel : INotifyPropertyChanged
+    public class SearchViewModel : INotifyPropertyChanged
     {
-
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
 
