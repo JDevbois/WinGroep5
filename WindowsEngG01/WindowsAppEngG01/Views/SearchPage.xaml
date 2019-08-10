@@ -9,6 +9,53 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Text="Search By" FontSize="30sp" Margin="0,0, 0, 10" HorizontalAlignment="Center" Padding="20" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Name" Margin="0,0, 0, 10" />
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Type" Margin="0,0, 0, 10" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Has Promotions" Margin="0,0, 0, 10" />
 
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="0,0, 0, 10" />
+        <ComboBox Grid.Column="1" Grid.Row="2" Margin="0,0, 0, 10" />
+        <CheckBox Grid.Column="1" Grid.Row="3" Margin="0,0, 0, 10" />
+
+        <Button Grid.Row="4" Grid.ColumnSpan="3">
+            Submit Search
+        </Button>
+        <GridView Grid.Row="5"
+                  Grid.ColumnSpan="3"
+                  x:Name="lvSearchResults"
+                  SelectionChanged="LvSearchResults_SelectionChanged"
+                  ItemsSource="{Binding SearchResults}" >
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel x:Name="lvSearchResultsItem"
+                                Orientation="Vertical" Height="180"
+                                DoubleTapped="LvSearchResultsItem_DoubleTapped"
+                                BorderThickness="5"
+                                BorderBrush="Black">
+                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center"/>
+                        <Image Height="150" Width="140" Stretch="Uniform" VerticalAlignment="Center" Source="{Binding Logo}" />
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid MaximumRowsOrColumns="8" Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+        </GridView>
     </Grid>
 </Page>

@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Hub Header="Dashboard">
-        <HubSection Width="300" Header="Companies">
+        <HubSection Width="300" Header="Your Companies">
             <DataTemplate>
                 <StackPanel>
                     <GridView x:Name="LvCompanies" ItemsSource="{Binding Companies, Mode=TwoWay}" SelectionChanged="LvCompanies_SelectionChanged">

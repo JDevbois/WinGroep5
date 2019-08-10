@@ -9,10 +9,13 @@ using System.Threading.Tasks;
 namespace WindowsAppEngG01.DataManagers
 {
     //TODO not storing passwords in clear text
+    //TODO subscriptions should be handled by a subscription manager
     public class UserManager
     {
+        //TODO should be from db
         private static List<User> _users = new List<User>
             {
+            //TODO subscriptions
                 new User
                 {
                     Id = 1,
@@ -43,6 +46,7 @@ namespace WindowsAppEngG01.DataManagers
             };
 
         public static User LoggedInUser { get; set; }
+
         //TODO
         public void AddUser(User user)
         {

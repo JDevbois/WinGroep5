@@ -47,7 +47,7 @@ namespace WindowsAppEngG01.ViewModels
         {
             new CompanyManager().AddCompany(new Company
             {
-                //TODO
+                //TODO should be 'empty'
                 UserId = UserManager.LoggedInUser.Id,
                 Name = "Placeholder",
                 Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg")

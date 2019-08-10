@@ -21,7 +21,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--TODO-->
-        <TextBlock Text="Spotlights" Grid.Row="0" HorizontalAlignment="Stretch" TextAlignment="Center" FontSize="30sp" />
+        <TextBlock Text="Spotlights" Grid.Row="0" HorizontalAlignment="Stretch" TextAlignment="Center" Padding="20" FontSize="30sp" />
         <controls:Carousel
             x:Name="crsSpotlight"
             ItemsSource="{Binding SpotlightCompanies, Mode=TwoWay}"

@@ -67,6 +67,7 @@ namespace WindowsAppEngG01.DataManagers
 
         internal void UpdateCompany(Company company)
         {
+            //TODO if c.Id = null
             _companies.Replace(c => c.Id == company.Id, company);
         }
     }

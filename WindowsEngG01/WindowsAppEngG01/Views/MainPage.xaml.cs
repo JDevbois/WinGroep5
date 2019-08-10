@@ -79,6 +79,7 @@ namespace WindowsAppEngG01
                                 contentFrame.Navigate(typeof(NotLoggedInPage));
                             break;
                         case "Nav_Account":
+                            //TODO doesn't work properly
                             if (LoggedIn is false)
                                 contentFrame.Navigate(typeof(LoginPage));
                             else

@@ -7,8 +7,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <StackPanel>
-        <TextBlock Text="{Binding Name}" />
-    </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Grid.ColumnSpan="3" MaxHeight="300" Stretch="Uniform" VerticalAlignment="Center" Source="{Binding Logo}" />
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Name" />
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Address" />
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Website" />
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Opening Hours" />
+        
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Name}" />
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Street}" />
+        <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Number}" />
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding PostalCode}" />
+        <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding City}" />
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Website}" />
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding OpeningHours}" />
+    </Grid>
 </Page>

@@ -24,11 +24,13 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="E-mail:" Grid.Row="0" Grid.Column="0" />
-        <TextBlock Text="Password:" Grid.Row="1" Grid.Column="0" />
-        <TextBox Text="{Binding Email, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" />
-        <PasswordBox x:Name="passwordBox" Grid.Row="1" Grid.Column="1" />
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" Padding="20" FontSize="30sp" Text="Log In" />
+        <TextBlock Text="E-mail:" Grid.Row="1" Grid.Column="0" Margin="5,0,0,10" />
+        <TextBlock Text="Password:" Grid.Row="2" Grid.Column="0" Margin="5,0,0,10" />
+
+        <TextBox Text="{Binding Email, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Margin="20,0,20,10" />
+        <PasswordBox x:Name="passwordBox" Grid.Row="2" Grid.Column="1" Margin="20,0,20,10" />
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" Margin="20,0,0,10">
             
             <Button Content="Log in" Command="{Binding LoginCommand, Mode=OneTime}"
                     x:Name="btnLogIn"
@@ -42,6 +44,12 @@
                     Visibility="{Binding CanLogout, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
                     HorizontalAlignment="Center" Margin="2,0,0,0"/>
         </StackPanel>
-        <TextBlock Text="Don't have an account yet? Click here to register." Grid.Row="3" Grid.Column="1" x:Name="txtRegister" Tapped="TxtRegister_Tapped" />
+        <TextBlock Text="Don't have an account yet? Click here to register."
+                   Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                   x:Name="txtRegister" Tapped="TxtRegister_Tapped"
+                   TextDecorations="Underline"
+                   FontSize="12sp"
+                   Margin="20,0,0,0"
+                   Foreground="Blue"/>
     </Grid>
 </Page>

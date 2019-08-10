@@ -25,7 +25,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Register" Grid.Row="0" Grid.ColumnSpan="4" FontSize="22sp" Padding="20" />
+        <TextBlock Text="Register" Grid.Row="0" HorizontalAlignment="Center" Grid.ColumnSpan="4" FontSize="30sp" Padding="20" />
 
         <TextBlock Text="E-mail address" Grid.Row="1" Grid.Column="0" />
         <TextBox x:Name="txtEmail" Text="{Binding Email, Mode=TwoWay}" PlaceholderText="E-mail" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0, 0, 10" />

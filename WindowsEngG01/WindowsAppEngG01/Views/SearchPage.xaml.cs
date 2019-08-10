@@ -26,5 +26,15 @@ namespace WindowsAppEngG01.Views
         {
             this.InitializeComponent();
         }
+
+        private void LvSearchResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void LvSearchResultsItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+
+        }
     }
 }

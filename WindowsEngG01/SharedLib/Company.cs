@@ -19,6 +19,7 @@ namespace SharedLib
         public String Type { get; set; }
         public String Website { get; set; }
         public Uri Logo { get; set; }
+        //TODO should be static
         public List<String> AllowedTypes { get; set; }
 
         public Company()
