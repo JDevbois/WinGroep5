@@ -37,9 +37,7 @@ namespace WindowsAppEngG01.Views
         {
             base.OnNavigatedTo(e);
             var id = (String)e.Parameter;
-            CompanyDetails.Company = new CompanyManager().FindCompanyById(id);
-            Debug.WriteLine("company name: " + CompanyDetails.Company.Name);
-            Debug.WriteLine("company id: " + CompanyDetails.Company.Id);
+            CompanyDetails.SetCompany(new CompanyManager().FindCompanyById(id));
             this.DataContext = CompanyDetails;
         }
 

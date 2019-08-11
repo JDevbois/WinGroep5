@@ -9,30 +9,35 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition MinWidth="200" Width="auto"/>
+            <ColumnDefinition MinWidth="200" Width="auto"/>
+            <ColumnDefinition MinWidth="300" Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="300"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Grid.ColumnSpan="3" MaxHeight="300" Stretch="Uniform" VerticalAlignment="Center" Source="{Binding Logo}" />
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Name" />
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Address" />
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Website" />
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Opening Hours" />
+        <TextBlock Text="Company Details" FontSize="30sp" Margin="20" Grid.Row="0" />
+        <CheckBox Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Content="Subscribe?" />
+
+        <Image Grid.Row="1" Grid.ColumnSpan="2" MaxHeight="300" Stretch="Uniform" VerticalAlignment="Center" Source="{Binding Logo}" />
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Name" Margin="5" />
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Address" Margin="5" />
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Website" Margin="5" />
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Opening Hours" Margin="5" />
         
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Name}" />
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Street}" />
-        <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Number}" />
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding PostalCode}" />
-        <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding City}" />
-        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Website}" />
-        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding OpeningHours}" />
+        <TextBox IsEnabled="False" Grid.Row="2" Grid.Column="1" Text="{Binding Name}" Margin="5" />
+        <TextBox IsEnabled="False" Grid.Row="3" Grid.Column="1" Text="{Binding Street}" Margin="5" />
+        <TextBox IsEnabled="False" Grid.Row="3" Grid.Column="2" Text="{Binding Number}" Margin="5" />
+        <TextBox IsEnabled="False" Grid.Row="4" Grid.Column="1" Text="{Binding PostalCode}" Margin="5" />
+        <TextBox IsEnabled="False" Grid.Row="4" Grid.Column="2" Text="{Binding City}" Margin="5" />
+        <TextBox IsEnabled="False" Grid.Row="5" Grid.Column="1" Text="{Binding Website}" Margin="5" />
+        <TextBox IsEnabled="False" Grid.Row="6" Grid.Column="1" Text="{Binding OpeningHours}" Margin="5" />
     </Grid>
 </Page>

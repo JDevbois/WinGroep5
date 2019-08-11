@@ -11,7 +11,7 @@ namespace WindowsAppEngG01.ViewModels
 {
     public class CompanyDetails : INotifyPropertyChanged
     {
-        public Company Company { get; set; }
+        private Company Company { get; set; }
         private string _name;
         private string _city;
         private string _street;
@@ -34,6 +34,13 @@ namespace WindowsAppEngG01.ViewModels
         public string Street { get => Company.Street; set => _street = value; }
         public string PostalCode { get => Company.PostalCode; set => _postalCode = value; }
         public string Number { get => Company.Number; set => _number = value; }
+
+        public void SetCompany(Company company)
+        {
+            Company = company;
+            NotifyPropertyChanged(nameof(Company));
+        }
+
         public List<Promotion> Promotions { get => Company.Promotions; set => _promotions = value; }
         public List<Event> Events { get => Company.Events; set => _events = value; }
         public string OpeningHours { get => Company.OpeningHours; set => _openingHours = value; }
