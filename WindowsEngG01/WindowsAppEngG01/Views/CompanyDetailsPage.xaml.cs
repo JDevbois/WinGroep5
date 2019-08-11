@@ -36,7 +36,7 @@ namespace WindowsAppEngG01.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            var id = (int)e.Parameter;
+            var id = (String)e.Parameter;
             CompanyDetails.Company = new CompanyManager().FindCompanyById(id);
             Debug.WriteLine("company name: " + CompanyDetails.Company.Name);
             Debug.WriteLine("company id: " + CompanyDetails.Company.Id);

@@ -27,23 +27,33 @@
         <TextBlock Grid.Column="0" Grid.Row="2" Text="By Type Of Company" Margin="10, 0, 0, 10" />
         <TextBlock Grid.Column="0" Grid.Row="3" Text="Only Companies With Running Promotions" Margin="10, 5, 0, 10" />
 
-        <TextBox Grid.Column="1" Grid.Row="1" Margin="10, 0, 0, 10" PlaceholderText="Enter name of the company here..." Width="500" />
-        <ComboBox Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 10" PlaceholderText="Type" HorizontalAlignment="Right" Width="500" />
-        <CheckBox Grid.Column="1" Grid.Row="3" Margin="10, 0, 0, 10" HorizontalAlignment="Left" />
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="10, 0, 0, 10"
+                 PlaceholderText="Enter name of the company here..." Width="500"
+                 Text="{Binding NameFilter, Mode=TwoWay}"/>
+        <ComboBox Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 10"
+                  PlaceholderText="Type" HorizontalAlignment="Right" Width="500"
+                  ItemsSource="{Binding AllowedTypes, Mode=TwoWay}"
+                  SelectedValue="{Binding TypeFilter, Mode=TwoWay}"/>
+        <CheckBox Grid.Column="1" Grid.Row="3" Margin="10, 0, 0, 10"
+                  HorizontalAlignment="Left"
+                  IsChecked="{Binding HasPromotionsFilter, Mode=TwoWay}"/>
 
-        <Button Grid.Row="4" Grid.ColumnSpan="3">
+        <Button Grid.Row="4" Grid.ColumnSpan="3"
+                x:Name="btnSearch"
+                Command="{Binding SearchCommand, Mode=OneTime}">
             Submit Search
         </Button>
         <GridView Grid.Row="5"
                   Grid.ColumnSpan="3"
                   x:Name="lvSearchResults"
                   SelectionChanged="LvSearchResults_SelectionChanged"
-                  ItemsSource="{Binding SearchResults}" >
+                  ItemsSource="{Binding SearchResults, Mode=TwoWay}" >
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel x:Name="lvSearchResultsItem"
                                 Orientation="Vertical" Height="180"
                                 DoubleTapped="LvSearchResultsItem_DoubleTapped"
+                                Tapped="LvSearchResultsItem_Tapped"
                                 BorderThickness="5"
                                 BorderBrush="Black">
                         <TextBlock Text="{Binding Name}" HorizontalAlignment="Center"/>

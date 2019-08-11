@@ -24,6 +24,7 @@ namespace WindowsAppEngG01.Views
     public sealed partial class SearchPage : Page
     {
         public SearchViewModel ViewModel = new SearchViewModel();
+
         public SearchPage()
         {
             this.InitializeComponent();
@@ -36,6 +37,11 @@ namespace WindowsAppEngG01.Views
 
         private void LvSearchResultsItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
+        }
+
+        private void LvSearchResultsItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
         }
     }
 }

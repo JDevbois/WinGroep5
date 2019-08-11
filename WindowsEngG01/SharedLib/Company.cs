@@ -25,6 +25,8 @@ namespace SharedLib
         public Company()
         {
             Id = Guid.NewGuid().ToString();
+            Promotions = new List<Promotion>();
+            Events = new List<Event>();
             AllowedTypes = new List<String>
             {
                 "Night Shop",
