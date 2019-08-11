@@ -36,7 +36,7 @@ namespace WindowsAppEngG01.ViewModels
         }
 
         public List<String> AllowedTypes { get; set; }
-        public bool CompanySelected { get { return _companySelected;} set { _companySelected = value; NotifyPropertyChanged(nameof(_companySelected)); } }
+        public bool CompanySelected { get { return _companySelected;} set { _companySelected = value; NotifyPropertyChanged(nameof(CompanySelected)); } }
 
         public DashBoardViewModel()
         {

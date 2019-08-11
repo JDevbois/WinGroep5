@@ -16,6 +16,7 @@ namespace WindowsAppEngG01.DataManagers
                 new Company
                 {
                     UserId = 1,
+                    IsSpotlighted = true,
                     Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
                     Name = "HOGENT",
                     Promotions = new List<Promotion>
@@ -26,18 +27,21 @@ namespace WindowsAppEngG01.DataManagers
                 new Company
                 {
                     UserId = 2,
+                    IsSpotlighted = true,
                     Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
                     Name = "UGent"
                 },
                 new Company
                 {
                     UserId = 3,
+                    IsSpotlighted = false,
                     Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
                     Name = "Jos's Delhi"
                 },
                 new Company
                 {
                     UserId = 1,
+                    IsSpotlighted = false,
                     Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
                     Name = "Heimdal"
                 }
@@ -65,7 +69,7 @@ namespace WindowsAppEngG01.DataManagers
         //TODO filter companies on bool spotlighted
         public List<Company> GetSpotlightCompanies()
         {
-            return GetCompanies();
+            return GetCompanies().Where(c => c.IsSpotlighted).ToList();
         }
 
         public List<Company> GetCompanies()
