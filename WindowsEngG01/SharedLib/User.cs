@@ -9,19 +9,19 @@ namespace SharedLib
 {
     public class User : BasePerson
     {
-        public List<Company> Subscriptions { get; set; }
+        public List<String> Subscriptions { get; set; }
         public List<Company> Companies { get; set; }
 
-        public User() : this(new List<Company>(), new List<Company>())
+        public User() : this(new List<Company>(), new List<String>())
         {
         }
 
-        public User(List<Company> companies) : this(companies, new List<Company>())
+        public User(List<Company> companies) : this(companies, new List<String>())
         {
             Companies = companies;
         }
 
-        public User(List<Company> companies, List<Company> subscriptions)
+        public User(List<Company> companies, List<String> subscriptions)
         {
             Companies = companies;
             Subscriptions = subscriptions;

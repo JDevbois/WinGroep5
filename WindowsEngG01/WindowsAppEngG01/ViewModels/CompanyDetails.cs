@@ -47,7 +47,17 @@ namespace WindowsAppEngG01.ViewModels
         public string Type { get => Company.Type; set => _type = value; }
         public string Website { get => Company.Website; set => _website = value; }
         public Uri Logo { get => Company.Logo; set => _logo = value; }
+        public bool IsLoggedIn { get => UserManager.IsUserLoggedIn(); }
 
+        public bool IsUserSubscribed
+        {
+            get => UserManager.IsUserSubscribed(UserManager.LoggedInUser.Id, Company.Id);
+            set
+            {
+                UserManager.SetUserSubscription(value, UserManager.LoggedInUser.Id, Company.Id);
+                NotifyPropertyChanged(nameof(IsUserSubscribed));
+            }
+        }
         public CompanyDetails()
         {
 

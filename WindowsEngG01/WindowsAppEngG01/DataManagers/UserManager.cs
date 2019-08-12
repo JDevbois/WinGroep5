@@ -21,7 +21,7 @@ namespace WindowsAppEngG01.DataManagers
                     Id = 1,
                     Email = "Joren@heimdal.be",
                     Password = "aa",
-                    Subscriptions = new CompanyManager().GetCompanies()
+                    Subscriptions = new CompanyManager().GetCompanies().Select(c => c.Id).ToList()
                 },
                 new User
                 {
@@ -34,20 +34,19 @@ namespace WindowsAppEngG01.DataManagers
                     Id = 3,
                     Email = "stephen@heimdal.be",
                     Password = "cc",
-                    Subscriptions = new CompanyManager().GetCompanies()
+                    Subscriptions = new CompanyManager().GetCompanies().Select(c => c.Id).ToList()
                 },
                 new User
                 {
                     Id = 4,
                     Email = "hans@heimdal.be",
                     Password = "dd",
-                    Subscriptions = new CompanyManager().GetCompanies()
+                    Subscriptions = new CompanyManager().GetCompanies().Select(c => c.Id).ToList()
                 }
             };
 
         public static User LoggedInUser { get; set; }
 
-        //TODO
         public void AddUser(User user)
         {
             _users.Add(user);
@@ -61,14 +60,37 @@ namespace WindowsAppEngG01.DataManagers
             return GetUsers().First(u => u.Email == email && u.Password == password);
         }
 
+        public static User FindUser(int id)
+        {
+            return new UserManager().GetUsers().First(u => u.Id == id);
+        }
+
         public List<Company> GetSubscriptionsForUser()
         {
-            return LoggedInUser.Subscriptions;
+            return new CompanyManager().GetCompanies().Where(c => LoggedInUser.Subscriptions.Contains(c.Id)).ToList();
         }
 
         private List<User> GetUsers()
         {
             return _users;
+        }
+
+        internal static bool IsUserSubscribed(int userid, string companyid)
+        {
+            return FindUser(userid).Subscriptions.Contains(companyid);
+        }
+
+        internal static void SetUserSubscription(bool value, int userid, string companyid)
+        {
+            if (!value)
+            {
+                FindUser(userid).Subscriptions.Remove(companyid);
+            }
+            if (value)
+            {
+                FindUser(userid).Subscriptions.Add(companyid);
+            }
+
         }
 
         internal static bool IsUserLoggedIn()

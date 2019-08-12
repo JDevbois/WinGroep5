@@ -3,10 +3,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WindowsAppEngG01.Views"
+    xmlns:util="using:WindowsAppEngG01.Utils"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <util:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="200" Width="auto"/>
@@ -24,7 +28,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Company Details" FontSize="30sp" Margin="20" Grid.Row="0" />
-        <CheckBox Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Content="Subscribe?" />
+        <CheckBox Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Content="Subscribe?" 
+                  Visibility="{Binding IsLoggedIn, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
+                  IsChecked="{Binding IsUserSubscribed, Mode=TwoWay}"/>
 
         <Image Grid.Row="1" Grid.ColumnSpan="2" MaxHeight="300" Stretch="Uniform" VerticalAlignment="Center" Source="{Binding Logo}" />
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Name" Margin="5" />
