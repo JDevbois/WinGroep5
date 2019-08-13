@@ -24,13 +24,11 @@ namespace WindowsAppEngG01.ViewModels
 
         public bool IsAuthenticated { get; set; }
         public DelegateCommand LoginCommand { get; set; }
-        public DelegateCommand LogoutCommand { get; set; }
 
         public LoginViewModel()
         {
             IsAuthenticated = UserManager.IsUserLoggedIn();
             LoginCommand = new DelegateCommand(Login, CanLogin);
-            LogoutCommand = new DelegateCommand(Logout, CanLogout);
         }
 
         private void Login(object parameter)
@@ -45,7 +43,6 @@ namespace WindowsAppEngG01.ViewModels
 
                 NotifyPropertyChanged("IsAuthenticated");
                 LoginCommand.RaiseCanExecuteChanged();
-                LogoutCommand.RaiseCanExecuteChanged();
 
                 Email = string.Empty;
                 passwordBox.Password = string.Empty;
@@ -60,28 +57,6 @@ namespace WindowsAppEngG01.ViewModels
         public bool CanLogin(object parameter)
         {
             return !IsAuthenticated;
-        }
-
-        public void Logout(object parameter)
-        {
-            try
-            {
-                new UserManager().LogOut();
-                IsAuthenticated = UserManager.IsUserLoggedIn();
-
-                NotifyPropertyChanged("IsAuthenticated");
-                LoginCommand.RaiseCanExecuteChanged();
-                LogoutCommand.RaiseCanExecuteChanged();
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-            }
-        }
-
-        public bool CanLogout(object parameter)
-        {
-            return IsAuthenticated;
         }
 
         #region INotifyPropertyChanged Members

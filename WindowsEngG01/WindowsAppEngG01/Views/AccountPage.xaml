@@ -5,9 +5,12 @@
     xmlns:local="using:WindowsAppEngG01.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:util="using:WindowsAppEngG01.Utils"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Resources>
+        <util:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -16,6 +19,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -49,27 +53,44 @@
                    FontSize="20"/>
 
         <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,10,30"
-                 Grid.ColumnSpan="2"
+                 Grid.ColumnSpan="2" Text="{Binding Email, Mode=TwoWay}"
                  PlaceholderText="E-mail" />
         <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,10,30"
+                 Text="{Binding FirstName, Mode=TwoWay}"
                  PlaceholderText="First Name"/>
         <TextBox Grid.Row="2" Grid.Column="2" Margin="0,0,10,30"
+                 Text="{Binding LastName, Mode=TwoWay}"
                  PlaceholderText="Last Name"/>
         <TextBox Grid.Row="3" Grid.Column="1" Margin="0,0,10,10"
+                 Text="{Binding Street, Mode=TwoWay}"
                  PlaceholderText="Street"/>
         <TextBox Grid.Row="3" Grid.Column="2" Margin="0,0,10,10"
+                 Text="{Binding Number, Mode=TwoWay}"
                  PlaceholderText="Number"/>
         <TextBox Grid.Row="4" Grid.Column="1" Margin="0,0,10,30"
+                 Text="{Binding PostalCode, Mode=TwoWay}"
                  PlaceholderText="PostalCode"/>
         <TextBox Grid.Row="4" Grid.Column="2" Margin="0,0,10,30"
+                 Text="{Binding City, Mode=TwoWay}"
                  PlaceholderText="City"/>
         <TextBox Grid.Row="5" Grid.Column="1" Margin="0,0,10,10"
+                 Text="{Binding OldPassword, Mode=TwoWay}"
                  PlaceholderText="Enter Old Password"/>
         <TextBox Grid.Row="5" Grid.Column="2" Margin="0,0,10,10"
+                 Text="{Binding NewPassword, Mode=TwoWay}"
                  PlaceholderText="Enter New Password"/>
         <TextBox Grid.Row="6" Grid.Column="2" Margin="0,0,10,30"
+                 Text="{Binding ConfirmPassword, Mode=TwoWay}"
                  PlaceholderText="Confirm New Password"/>
 
-        <Button Grid.Row="7" Grid.Column="2" Width="240">Submit Changes</Button>
+        <Button Grid.Row="7" Grid.Column="2" Width="240" HorizontalAlignment="Center" Margin="0,10,0,10">Submit Password Change</Button>
+        
+        <Button Content="Log out" 
+                x:Name="btnLogOut"
+                Grid.Row="8" Grid.Column="2"
+                Width="240"
+                Command="{Binding LogoutCommand, Mode=OneTime}"
+                Visibility="{Binding CanLogout, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
+                HorizontalAlignment="Center" Margin="0,10,0,10"/>
     </Grid>
 </Page>

@@ -37,12 +37,6 @@
                     CommandParameter="{Binding ElementName=passwordBox}"
                     Visibility="{Binding CanLogin, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
                     HorizontalAlignment="Center"/>
-            
-            <Button Content="Log out" 
-                    x:Name="btnLogOut"
-                    Command="{Binding LogoutCommand, Mode=OneTime}"
-                    Visibility="{Binding CanLogout, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
-                    HorizontalAlignment="Center" Margin="2,0,0,0"/>
         </StackPanel>
         <TextBlock Text="Don't have an account yet? Click here to register."
                    Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"

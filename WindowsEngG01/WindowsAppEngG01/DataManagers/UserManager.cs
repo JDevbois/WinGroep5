@@ -90,7 +90,6 @@ namespace WindowsAppEngG01.DataManagers
             {
                 FindUser(userid).Subscriptions.Add(companyid);
             }
-
         }
 
         internal static bool IsUserLoggedIn()
