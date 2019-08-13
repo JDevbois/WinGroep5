@@ -22,6 +22,7 @@ namespace WindowsAppEngG01.ViewModels
         private string confirmPassword;
 
         public DelegateCommand LogoutCommand { get; set; }
+        public DelegateCommand ChangePasswordCommand { get; set; }
 
         public string Email { get => user.Email; set
             {
@@ -117,10 +118,29 @@ namespace WindowsAppEngG01.ViewModels
             return IsAuthenticated;
         }
 
+        private bool CanChangePassword(object parameter)
+        {
+            return OldPassword == user.Password && NewPassword == ConfirmPassword;
+        }
+
+        private void ChangePassword(object parameter)
+        {
+            try
+            {
+                UserManager.FindUser(user.Id).Password = NewPassword;
+                Logout(parameter);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+        }
+
         public AccountViewModel()
         {
             IsAuthenticated = UserManager.IsUserLoggedIn();
             LogoutCommand = new DelegateCommand(Logout, CanLogout);
+            ChangePasswordCommand = new DelegateCommand(ChangePassword);
         }
 
         #region INotifyPropertyChanged Members

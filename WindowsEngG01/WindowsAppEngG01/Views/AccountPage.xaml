@@ -73,17 +73,20 @@
         <TextBox Grid.Row="4" Grid.Column="2" Margin="0,0,10,30"
                  Text="{Binding City, Mode=TwoWay}"
                  PlaceholderText="City"/>
-        <TextBox Grid.Row="5" Grid.Column="1" Margin="0,0,10,10"
-                 Text="{Binding OldPassword, Mode=TwoWay}"
-                 PlaceholderText="Enter Old Password"/>
-        <TextBox Grid.Row="5" Grid.Column="2" Margin="0,0,10,10"
-                 Text="{Binding NewPassword, Mode=TwoWay}"
-                 PlaceholderText="Enter New Password"/>
-        <TextBox Grid.Row="6" Grid.Column="2" Margin="0,0,10,30"
-                 Text="{Binding ConfirmPassword, Mode=TwoWay}"
-                 PlaceholderText="Confirm New Password"/>
+        <PasswordBox Grid.Row="5" Grid.Column="1" Margin="0,0,10,10"
+                     Password="{Binding OldPassword, Mode=TwoWay}"
+                     PlaceholderText="Enter Old Password"/>
+        <PasswordBox Grid.Row="5" Grid.Column="2" Margin="0,0,10,10"
+                     Password="{Binding NewPassword, Mode=TwoWay}"
+                     PlaceholderText="Enter New Password"/>
+        <PasswordBox Grid.Row="6" Grid.Column="2" Margin="0,0,10,30"
+                     Password="{Binding ConfirmPassword, Mode=TwoWay}"
+                     PlaceholderText="Confirm New Password"/>
 
-        <Button Grid.Row="7" Grid.Column="2" Width="240" HorizontalAlignment="Center" Margin="0,10,0,10">Submit Password Change</Button>
+        <Button Grid.Row="7" Grid.Column="2" Width="240" 
+                HorizontalAlignment="Center"
+                Command="{Binding ChangePasswordCommand, Mode=OneTime}"
+                Margin="0,10,0,10">Submit Password Change</Button>
         
         <Button Content="Log out" 
                 x:Name="btnLogOut"
