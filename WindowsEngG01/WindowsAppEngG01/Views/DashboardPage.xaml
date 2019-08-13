@@ -109,13 +109,16 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Add Event" Grid.Row="0" Margin="10" VerticalAlignment="Center" />
-                    <Button Content="+" Grid.Column="1" Margin="10"/>
+                    <Button x:Name="btnEvent" Content="+" Grid.Column="1" 
+                            Margin="10" Tapped="BtnEvent_Tapped" />
 
                     <TextBlock Text="Add Discount Coupon" Grid.Row="1" Margin="10" VerticalAlignment="Center" />
-                    <Button Content="+" Grid.Row="1" Grid.Column="1" Margin="10" />
+                    <Button x:Name="btnDiscount" Content="+" Grid.Row="1" Grid.Column="1" 
+                            Margin="10" Tapped="BtnDiscount_Tapped" />
 
                     <TextBlock Text="Add Other Promotion" Grid.Row="2" Margin="10" VerticalAlignment="Center" />
-                    <Button Content="+" Grid.Column="1" Grid.Row="2" Margin="10" />
+                    <Button x:Name="btnPromotion" Content="+" Grid.Column="1" Grid.Row="2" 
+                            Margin="10" Tapped="BtnPromotion_Tapped" />
                 </Grid>
             </DataTemplate>
         </HubSection>

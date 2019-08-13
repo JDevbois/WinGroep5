@@ -56,5 +56,20 @@ namespace WindowsAppEngG01.Views
 
             return null;
         }
+
+        private void BtnEvent_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AddPromotionPage), new Utils.PassThroughElement(ViewModel.SelectedCompany.Id, (int)Utils.PassThroughElement.IDENTIFIERS.EVENT));
+        }
+
+        private void BtnDiscount_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AddPromotionPage), new Utils.PassThroughElement(ViewModel.SelectedCompany.Id, (int)Utils.PassThroughElement.IDENTIFIERS.DISCOUNTCODE));
+        }
+
+        private void BtnPromotion_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AddPromotionPage), new Utils.PassThroughElement(ViewModel.SelectedCompany.Id, (int)Utils.PassThroughElement.IDENTIFIERS.PROMOTION));
+        }
     }
 }
