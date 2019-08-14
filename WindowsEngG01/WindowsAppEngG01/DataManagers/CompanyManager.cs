@@ -62,6 +62,13 @@ namespace WindowsAppEngG01.DataManagers
             return null;
         }
 
+        public static void CheckForExpiredPromotions(String companyId)
+        {
+            _companies.Find(c => c.Id.Equals(companyId)).Promotions.RemoveAll(p => DateTimeOffset.Compare(p.EndDate, DateTimeOffset.Now) < 0);
+            _companies.Find(c => c.Id.Equals(companyId)).Events.RemoveAll(p => DateTimeOffset.Compare(p.EndDate, DateTimeOffset.Now) < 0);
+            _companies.Find(c => c.Id.Equals(companyId)).DiscountCoupons.RemoveAll(p => DateTimeOffset.Compare(p.EndDate, DateTimeOffset.Now) < 0);
+        }
+
         internal static void DeleteCompany(string Companyid)
         {
             _companies.RemoveAll(c => c.Id.Equals(Companyid));

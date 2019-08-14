@@ -44,7 +44,7 @@ namespace WindowsAppEngG01.Views
 
         private void LvCompanies_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ViewModel.SelectedCompany = (Company)((GridView)FindChildByName(this, "LvCompanies")).SelectedItem;
+            ViewModel.SetSelectedCompany((Company)((GridView)FindChildByName(this, "LvCompanies")).SelectedItem);
         }
 
         static DependencyObject FindChildByName(DependencyObject from, string name)

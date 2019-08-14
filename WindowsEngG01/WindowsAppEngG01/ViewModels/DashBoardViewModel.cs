@@ -42,6 +42,12 @@ namespace WindowsAppEngG01.ViewModels
         public List<String> AllowedTypes { get; set; }
         public bool CompanySelected { get { return _companySelected;} set { _companySelected = value; NotifyPropertyChanged(nameof(CompanySelected)); } }
 
+        internal void SetSelectedCompany(Company selectedItem)
+        {
+            CompanyManager.CheckForExpiredPromotions(selectedItem.Id);
+            SelectedCompany = selectedItem;
+        }
+
         public DashBoardViewModel()
         {
             Companies = new CompanyManager().GetCompanies().Where(c => c.UserId.Equals(UserManager.LoggedInUser.Id)).ToList();
