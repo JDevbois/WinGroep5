@@ -13,5 +13,10 @@ namespace SharedLib
         public TimeSpan EndTime { get; set; }
         public String CompanyId { get; set; }
         public Uri PDFUri { get; set; }
+
+        public String EndDateString
+        {
+            get { return EndDate.ToString("D"); }
+        }
     }
 }

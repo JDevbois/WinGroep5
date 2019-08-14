@@ -18,6 +18,7 @@ namespace WindowsAppEngG01.ViewModels
     public class PromotionViewModel : INotifyPropertyChanged
     {
         private Company Company { get; set; }
+
         private int Identifier
         {
             get { return _identifier; }
@@ -30,11 +31,11 @@ namespace WindowsAppEngG01.ViewModels
 
         private void SetPromotionType(int value)
         {
-            if (value == (int)PassThroughElement.IDENTIFIERS.EVENT)
+            if (value == (int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT)
             {
                 Promotion = new Event();
             }
-            else if (value == (int)PassThroughElement.IDENTIFIERS.DISCOUNTCODE)
+            else if (value == (int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE)
             {
                 Promotion = new DiscountCode();
             }
@@ -45,14 +46,6 @@ namespace WindowsAppEngG01.ViewModels
         }
 
         private Promotion Promotion { get; set; }
-
-        private String _name;
-        private String _description;
-        private DateTimeOffset _startDate;
-        private DateTimeOffset _endDate;
-
-        private TimeSpan _startTime;
-        private TimeSpan _endTime;
 
         private Uri _pdfUri;
         private int _identifier;
@@ -118,16 +111,15 @@ namespace WindowsAppEngG01.ViewModels
             Identifier = identifier;
         }
 
-
         public string PromotionTypeTitle
         {
             get
             {
-                if (Identifier == (int)PassThroughElement.IDENTIFIERS.EVENT)
+                if (Identifier == (int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT)
                 {
                     return "Add event";
                 }
-                else if (Identifier == (int)PassThroughElement.IDENTIFIERS.DISCOUNTCODE)
+                else if (Identifier == (int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE)
                 {
                     return "Add Discount Coupon";
                 }
@@ -144,11 +136,11 @@ namespace WindowsAppEngG01.ViewModels
         {
             if (NoFieldsAreNull())
             {
-                if (Identifier == (int)PassThroughElement.IDENTIFIERS.EVENT)
+                if (Identifier == (int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT)
                 {
                     CompanyManager.AddEvent(Company.Id, (Event)Promotion);
                 }
-                else if (Identifier == (int)PassThroughElement.IDENTIFIERS.DISCOUNTCODE)
+                else if (Identifier == (int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE)
                 {
                     CompanyManager.AddDiscountCoupon(Company.Id, (DiscountCode)Promotion);
                 }

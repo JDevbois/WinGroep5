@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsAppEngG01.Utils
 {
-    public class PassThroughElement
+    public class AddPromotionPassThroughElement
     {
         private string id;
         private int identifier;
@@ -18,7 +18,7 @@ namespace WindowsAppEngG01.Utils
             PROMOTION = 2
         }
 
-        public PassThroughElement(string id, int identifier)
+        public AddPromotionPassThroughElement(string id, int identifier)
         {
             this.id = id;
             this.identifier = identifier;

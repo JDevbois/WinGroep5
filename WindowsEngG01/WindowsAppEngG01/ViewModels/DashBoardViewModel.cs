@@ -10,6 +10,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using WindowsAppEngG01.Commands;
 using WindowsAppEngG01.DataManagers;
+using WindowsAppEngG01.Views;
 
 namespace WindowsAppEngG01.ViewModels
 {
@@ -22,6 +23,7 @@ namespace WindowsAppEngG01.ViewModels
         public DelegateCommand AddCompanyCommand { get; set; }
 
         public DelegateCommand SaveChangesCommand { get; set; }
+        public DelegateCommand EditPromotionCommand { get; set; }
 
         public List<Company> Companies
         {
@@ -43,6 +45,7 @@ namespace WindowsAppEngG01.ViewModels
             Companies = new CompanyManager().GetCompanies().Where(c => c.UserId.Equals(UserManager.LoggedInUser.Id)).ToList();
             AddCompanyCommand = new DelegateCommand(AddCompany);
             SaveChangesCommand = new DelegateCommand(SaveChanges);
+            EditPromotionCommand = new DelegateCommand(EditPromotion);
             SelectedCompany = CreateTempCompany();
             CompanySelected = false;
         }
@@ -67,6 +70,14 @@ namespace WindowsAppEngG01.ViewModels
         private void SaveChanges(object parameter)
         {
             new CompanyManager().UpdateCompany((Company)parameter);
+        }
+
+        private void EditPromotion(object parameter)
+        {
+            var paramPromotion = (Promotion)parameter;
+
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(EditPromotionPage), paramPromotion);
+            Debug.WriteLine("Edit Promotion Called");
         }
 
         #region INotifyPropertyChanged Members

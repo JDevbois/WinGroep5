@@ -26,13 +26,21 @@ namespace WindowsAppEngG01.Views
     /// </summary>
     public sealed partial class DashboardPage : Page
     {
-        public DashBoardViewModel ViewModel = new DashBoardViewModel();
+        public DashBoardViewModel ViewModel
+        {
+            get { return (DashBoardViewModel)GetValue(ViewModelProperty); }
+            set { SetValue(ViewModelProperty, value); }
+        }
 
         public DashboardPage()
         {
+            ViewModel = new DashBoardViewModel();
             this.InitializeComponent();
             this.DataContext = ViewModel;
         }
+
+        public static readonly DependencyProperty ViewModelProperty =
+            DependencyProperty.Register("ViewModel", typeof(DashBoardViewModel), typeof(DashboardPage), new PropertyMetadata(0));
 
         private void LvCompanies_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -59,17 +67,17 @@ namespace WindowsAppEngG01.Views
 
         private void BtnEvent_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AddPromotionPage), new Utils.PassThroughElement(ViewModel.SelectedCompany.Id, (int)Utils.PassThroughElement.IDENTIFIERS.EVENT));
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AddPromotionPage), new Utils.AddPromotionPassThroughElement(ViewModel.SelectedCompany.Id, (int)Utils.AddPromotionPassThroughElement.IDENTIFIERS.EVENT));
         }
 
         private void BtnDiscount_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AddPromotionPage), new Utils.PassThroughElement(ViewModel.SelectedCompany.Id, (int)Utils.PassThroughElement.IDENTIFIERS.DISCOUNTCODE));
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AddPromotionPage), new Utils.AddPromotionPassThroughElement(ViewModel.SelectedCompany.Id, (int)Utils.AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE));
         }
 
         private void BtnPromotion_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AddPromotionPage), new Utils.PassThroughElement(ViewModel.SelectedCompany.Id, (int)Utils.PassThroughElement.IDENTIFIERS.PROMOTION));
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AddPromotionPage), new Utils.AddPromotionPassThroughElement(ViewModel.SelectedCompany.Id, (int)Utils.AddPromotionPassThroughElement.IDENTIFIERS.PROMOTION));
         }
     }
 }
