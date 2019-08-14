@@ -79,7 +79,7 @@ namespace WindowsAppEngG01.ViewModels
         {
             var paramPromotion = (Promotion)parameter;
 
-            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(EditPromotionPage), paramPromotion);
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(EditPromotionPage), new Utils.EditPromotionPassThroughElement(paramPromotion, SelectedCompany, (int)Utils.AddPromotionPassThroughElement.IDENTIFIERS.PROMOTION));
             Debug.WriteLine("Edit Promotion Called");
         }
 
@@ -87,15 +87,15 @@ namespace WindowsAppEngG01.ViewModels
         {
             var paramPromotion = (Event)parameter;
 
-            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(EditPromotionPage), paramPromotion);
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(EditPromotionPage), new Utils.EditPromotionPassThroughElement(paramPromotion, SelectedCompany, (int)Utils.AddPromotionPassThroughElement.IDENTIFIERS.EVENT));
             Debug.WriteLine("Edit Event Called");
         }
 
         private void EditDiscountCoupon(object parameter)
         {
-            var paramPromotion = (DiscountCode)parameter;
+            var paramPromotion = (DiscountCoupon)parameter;
 
-            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(EditPromotionPage), paramPromotion);
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(EditPromotionPage), new Utils.EditPromotionPassThroughElement(paramPromotion, SelectedCompany, (int)Utils.AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE));
             Debug.WriteLine("Edit Discount Coupon Called");
         }
 

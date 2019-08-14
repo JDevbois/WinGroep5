@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SharedLib
 {
-    public class DiscountCode : Promotion
+    public class DiscountCoupon : Promotion
     {
     }
 }

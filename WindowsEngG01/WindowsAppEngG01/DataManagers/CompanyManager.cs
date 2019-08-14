@@ -47,6 +47,21 @@ namespace WindowsAppEngG01.DataManagers
                 }
             };
 
+        internal static Promotion FindPromotion(string companyId, string promotionId, int identifier)
+        {
+            if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.PROMOTION))
+            {
+                return _companies.Find(c => c.Id.Equals(companyId)).Promotions.Find(p => p.Id.Equals(promotionId));
+            } else if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT))
+            {
+                return _companies.Find(c => c.Id.Equals(companyId)).Events.Find(p => p.Id.Equals(promotionId));
+            } else if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE))
+            {
+                return _companies.Find(c => c.Id.Equals(companyId)).DiscountCoupons.Find(p => p.Id.Equals(promotionId));
+            }
+            return null;
+        }
+
         public List<Company> Search(String nameFilter, String typeFilter, bool hasPromotionsFilter)
         {
             var result = _companies;
@@ -64,6 +79,36 @@ namespace WindowsAppEngG01.DataManagers
                 result = result.Where(c => c.Promotions.Count > 0 || c.Events.Count > 0).ToList();
             }
             return result;
+        }
+
+        internal static void UpdatePromotion(string companyId, Promotion promotion, int identifier)
+        {
+            if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE))
+            {
+                _companies.Find(c => c.Id.Equals(companyId)).DiscountCoupons.Replace(c => c.Id.Equals(promotion.Id), (DiscountCoupon)promotion);
+            } else if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT))
+            {
+                _companies.Find(c => c.Id.Equals(companyId)).Events.Replace(c => c.Id.Equals(promotion.Id), (Event)promotion);
+            } else
+            {
+                _companies.Find(c => c.Id.Equals(companyId)).Promotions.Replace(c => c.Id.Equals(promotion.Id), promotion);
+            }
+        }
+
+        internal static void DeletePromotion(string companyId, Promotion promotion, int identifier)
+        {
+            if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE))
+            {
+                _companies.Find(c => c.Id.Equals(companyId)).DiscountCoupons.RemoveAll(dc => dc.Id.Equals(promotion.Id));
+            }
+            else if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT))
+            {
+                _companies.Find(c => c.Id.Equals(companyId)).Events.RemoveAll(dc => dc.Id.Equals(promotion.Id));
+            }
+            else
+            {
+                _companies.Find(c => c.Id.Equals(companyId)).Promotions.RemoveAll(dc => dc.Id.Equals(promotion.Id));
+            }
         }
 
         //TODO filter companies on bool spotlighted
@@ -103,10 +148,9 @@ namespace WindowsAppEngG01.DataManagers
             _companies.Find(c => c.Id.Equals(id)).Events.Add(promotion);
         }
 
-        internal static void AddDiscountCoupon(string id, DiscountCode promotion)
+        internal static void AddDiscountCoupon(string id, DiscountCoupon promotion)
         {
             _companies.Find(c => c.Id.Equals(id)).DiscountCoupons.Add(promotion);
-
         }
 
         internal static void AddPromotion(string id, Promotion promotion)

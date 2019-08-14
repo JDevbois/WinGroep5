@@ -125,7 +125,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock MaxWidth="150" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" />
                                     <Button Grid.Column="2" Grid.Row="0" Content="Edit" HorizontalAlignment="Right" Grid.RowSpan="2" 
-                                            Command="{Binding ViewModel.EditPromotionCommand, ElementName=Page, Mode=OneTime}"
+                                            Command="{Binding ViewModel.EditEventCommand, ElementName=Page, Mode=OneTime}"
                                             CommandParameter="{Binding}"/>
 
                                     <TextBlock Grid.Column="0" Grid.Row="1" Text="Until:" FontSize="10" />
@@ -149,7 +149,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock MaxWidth="150" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" />
                                     <Button Grid.Column="2" Grid.Row="0" Content="Edit" HorizontalAlignment="Right" Grid.RowSpan="2" 
-                                            Command="{Binding ViewModel.EditPromotionCommand, ElementName=Page, Mode=OneTime}"
+                                            Command="{Binding ViewModel.EditDiscountCouponCommand, ElementName=Page, Mode=OneTime}"
                                             CommandParameter="{Binding}"/>
 
                                     <TextBlock Grid.Column="0" Grid.Row="1" Text="Until:" FontSize="10" />

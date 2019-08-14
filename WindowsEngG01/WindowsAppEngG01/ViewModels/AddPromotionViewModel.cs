@@ -37,7 +37,7 @@ namespace WindowsAppEngG01.ViewModels
             }
             else if (value == (int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE)
             {
-                Promotion = new DiscountCode();
+                Promotion = new DiscountCoupon();
             }
             else
             {
@@ -142,7 +142,7 @@ namespace WindowsAppEngG01.ViewModels
                 }
                 else if (Identifier == (int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE)
                 {
-                    CompanyManager.AddDiscountCoupon(Company.Id, (DiscountCode)Promotion);
+                    CompanyManager.AddDiscountCoupon(Company.Id, (DiscountCoupon)Promotion);
                 }
                 else
                 {
