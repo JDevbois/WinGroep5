@@ -85,18 +85,20 @@ namespace WindowsAppEngG01.ViewModels
             get { return Promotion.EndTime; }
             set { Promotion.EndTime = value; NotifyPropertyChanged(nameof(EndTime)); }
         }
-        public String PDFUri
+        public Uri PDFUri
         {
-            get { return _pDFUri; }
-            set { _pDFUri = value; NotifyPropertyChanged(nameof(PDFUri)); }
+            get { return Promotion.PDFUri; }
+            set { Promotion.PDFUri = value; NotifyPropertyChanged(nameof(PDFUri)); }
         }
         public DelegateCommand SubmitPromotionCommand { get; set; }
         public DelegateCommand DeletePromotionCommand { get; set; }
+        public DelegateCommand UploadPDFCommand { get; set; }
 
         public EditPromotionViewModel()
         {
             SubmitPromotionCommand = new DelegateCommand(SubmitPromotion);
             DeletePromotionCommand = new DelegateCommand(DeletePromotion);
+            UploadPDFCommand = new DelegateCommand(UploadPDFAsync);
         }
 
         private void SubmitPromotion(object parameter)
@@ -113,6 +115,27 @@ namespace WindowsAppEngG01.ViewModels
             Debug.WriteLine("Delete Promotion Called");
 
             ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(DashboardPage));
+        }
+
+        private async void UploadPDFAsync(object parameter)
+        {
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.List;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+            picker.FileTypeFilter.Add(".pdf");
+
+            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
+            if (file != null)
+            {
+                // Application now has read/write access to the picked file
+                PDFUri = new Uri(file.Path);
+                Debug.WriteLine("Picked photo: " + file.Path);
+            }
+            else
+            {
+                Debug.WriteLine("Operation cancelled.");
+            }
+            Debug.WriteLine("Upload PDF called");
         }
 
         #region INotifyPropertyChanged Members

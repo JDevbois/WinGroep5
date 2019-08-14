@@ -47,10 +47,10 @@ namespace WindowsAppEngG01.ViewModels
 
         private Promotion Promotion { get; set; }
 
-        private Uri _pdfUri;
         private int _identifier;
 
         public DelegateCommand SubmitPromotionCommand { get; set; }
+        public DelegateCommand UploadPDFCommand { get; set; }
 
         public string Name { get => Promotion.Name; set
             {
@@ -80,9 +80,9 @@ namespace WindowsAppEngG01.ViewModels
             }
         }
 
-        public Uri PDFUri { get => _pdfUri; set
+        public Uri PDFUri { get => Promotion.PDFUri; set
             {
-                _pdfUri = value;
+                Promotion.PDFUri = value;
                 NotifyPropertyChanged(nameof(PDFUri));
             }
         }
@@ -160,6 +160,28 @@ namespace WindowsAppEngG01.ViewModels
             SetPromotionType(Identifier);
 
             SubmitPromotionCommand = new DelegateCommand(SubmitPromotion);
+            UploadPDFCommand = new DelegateCommand(UploadPDFAsync);
+        }
+
+        private async void UploadPDFAsync(object parameter)
+        {
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.List;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+            picker.FileTypeFilter.Add(".pdf");
+
+            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
+            if (file != null)
+            {
+                // Application now has read/write access to the picked file
+                PDFUri = new Uri(file.Path);
+                Debug.WriteLine("Picked photo: " + file.Path);
+            }
+            else
+            {
+                Debug.WriteLine("Operation cancelled.");
+            }
+            Debug.WriteLine("Upload PDF called");
         }
 
         #region INotifyPropertyChanged Members
