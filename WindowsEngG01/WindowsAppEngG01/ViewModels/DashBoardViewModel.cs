@@ -21,9 +21,10 @@ namespace WindowsAppEngG01.ViewModels
         private bool _companySelected;
 
         public DelegateCommand AddCompanyCommand { get; set; }
-
         public DelegateCommand SaveChangesCommand { get; set; }
         public DelegateCommand EditPromotionCommand { get; set; }
+        public DelegateCommand EditEventCommand { get; set; }
+        public DelegateCommand EditDiscountCouponCommand { get; set; }
 
         public List<Company> Companies
         {
@@ -46,6 +47,8 @@ namespace WindowsAppEngG01.ViewModels
             AddCompanyCommand = new DelegateCommand(AddCompany);
             SaveChangesCommand = new DelegateCommand(SaveChanges);
             EditPromotionCommand = new DelegateCommand(EditPromotion);
+            EditEventCommand = new DelegateCommand(EditEvent);
+            EditDiscountCouponCommand = new DelegateCommand(EditDiscountCoupon);
             SelectedCompany = CreateTempCompany();
             CompanySelected = false;
         }
@@ -78,6 +81,22 @@ namespace WindowsAppEngG01.ViewModels
 
             ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(EditPromotionPage), paramPromotion);
             Debug.WriteLine("Edit Promotion Called");
+        }
+
+        private void EditEvent(object parameter)
+        {
+            var paramPromotion = (Event)parameter;
+
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(EditPromotionPage), paramPromotion);
+            Debug.WriteLine("Edit Event Called");
+        }
+
+        private void EditDiscountCoupon(object parameter)
+        {
+            var paramPromotion = (DiscountCode)parameter;
+
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(EditPromotionPage), paramPromotion);
+            Debug.WriteLine("Edit Discount Coupon Called");
         }
 
         #region INotifyPropertyChanged Members

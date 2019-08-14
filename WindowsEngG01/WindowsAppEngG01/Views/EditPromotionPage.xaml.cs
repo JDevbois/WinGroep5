@@ -23,7 +23,7 @@ namespace WindowsAppEngG01.Views
     /// </summary>
     public sealed partial class EditPromotionPage : Page
     {
-        private PromotionViewModel ViewModel;
+        private EditPromotionViewModel ViewModel;
 
         public EditPromotionPage()
         {
@@ -33,7 +33,7 @@ namespace WindowsAppEngG01.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            // Parameter = (Promotion)e.Parameter;
+            ViewModel.Promotion = (Promotion)e.Parameter;
             // ViewModel.SetCompany(new CompanyManager().FindCompanyById(Parameter.Id));
             // ViewModel.SetPromotionIdentifier(Parameter.Identifier);
             this.DataContext = ViewModel;

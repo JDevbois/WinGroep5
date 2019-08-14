@@ -25,7 +25,7 @@ namespace WindowsAppEngG01.Views
     /// </summary>
     public sealed partial class AddPromotionPage : Page
     {
-        public PromotionViewModel ViewModel = new PromotionViewModel();
+        public AddPromotionViewModel ViewModel = new AddPromotionViewModel();
         public AddPromotionPassThroughElement Parameter;
 
         public AddPromotionPage()

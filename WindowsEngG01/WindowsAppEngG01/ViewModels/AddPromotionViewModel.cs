@@ -15,7 +15,7 @@ using WindowsAppEngG01.Views;
 
 namespace WindowsAppEngG01.ViewModels
 {
-    public class PromotionViewModel : INotifyPropertyChanged
+    public class AddPromotionViewModel : INotifyPropertyChanged
     {
         private Company Company { get; set; }
 
@@ -155,7 +155,7 @@ namespace WindowsAppEngG01.ViewModels
             }
         }
 
-        public PromotionViewModel()
+        public AddPromotionViewModel()
         {
             SetPromotionType(Identifier);
 
