@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WindowsAppEngG01.Utils;
 
 namespace WindowsAppEngG01.DataManagers
 {
@@ -100,6 +101,11 @@ namespace WindowsAppEngG01.DataManagers
         public void LogOut()
         {
             LoggedInUser = null;
+        }
+
+        internal static void UpdateUser(User user)
+        {
+            _users.Replace(u => u.Id.Equals(user.Id), user);
         }
     }
 }
