@@ -101,12 +101,31 @@ namespace WindowsAppEngG01.ViewModels
             UploadPDFCommand = new DelegateCommand(UploadPDFAsync);
         }
 
+        public bool NoFieldsAreNull()
+        {
+            return !String.IsNullOrEmpty(Name) && !String.IsNullOrEmpty(Description);
+        }
+
+        private bool IsStartNotLaterThanEnd()
+        {
+            return DateTimeOffset.Compare(StartDate, EndDate) < 0;
+        }
+
         private void SubmitPromotion(object parameter)
         {
-            CompanyManager.UpdatePromotion(CompanyId, Promotion, Identifier);
-            Debug.WriteLine("Update Promotion Called");
-
             ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(DashboardPage));
+
+            if (NoFieldsAreNull() && IsStartNotLaterThanEnd())
+            {
+                CompanyManager.UpdatePromotion(CompanyId, Promotion, Identifier);
+                Debug.WriteLine("Update Promotion Called");
+
+                ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(DashboardPage));
+            }
+            else
+            {
+                // TODO feedback
+            }
         }
 
         private void DeletePromotion(object parameter)

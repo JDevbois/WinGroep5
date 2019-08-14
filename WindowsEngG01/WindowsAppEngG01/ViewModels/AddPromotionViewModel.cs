@@ -132,9 +132,15 @@ namespace WindowsAppEngG01.ViewModels
             return !String.IsNullOrEmpty(Name) && !String.IsNullOrEmpty(Description);
         }
 
+        private bool IsStartNotLaterThanEnd()
+        {
+            return DateTimeOffset.Compare(StartDate, EndDate) < 0;
+        }
+
         private void SubmitPromotion(object parameter)
         {
-            if (NoFieldsAreNull())
+
+            if (NoFieldsAreNull() && IsStartNotLaterThanEnd())
             {
                 if (Identifier == (int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT)
                 {
