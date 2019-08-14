@@ -40,7 +40,7 @@ namespace WindowsAppEngG01.ViewModels
 
         public DashBoardViewModel()
         {
-            Companies = new CompanyManager().GetCompanies().Where(c => c.UserId == UserManager.LoggedInUser.Id).ToList();
+            Companies = new CompanyManager().GetCompanies().Where(c => c.UserId.Equals(UserManager.LoggedInUser.Id)).ToList();
             AddCompanyCommand = new DelegateCommand(AddCompany);
             SaveChangesCommand = new DelegateCommand(SaveChanges);
             SelectedCompany = CreateTempCompany();
@@ -51,7 +51,7 @@ namespace WindowsAppEngG01.ViewModels
         {
             var temp = CreateTempCompany();
             new CompanyManager().AddCompany(temp);
-            Companies = new CompanyManager().GetCompanies().Where(c => c.UserId == UserManager.LoggedInUser.Id).ToList();
+            Companies = new CompanyManager().GetCompanies().Where(c => c.UserId.Equals(UserManager.LoggedInUser.Id)).ToList();
             Debug.WriteLine(Companies);
         }
 

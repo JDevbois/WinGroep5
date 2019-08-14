@@ -16,6 +16,7 @@ namespace SharedLib
         public bool IsSpotlighted { get; set; }
         public List<Promotion> Promotions { get; set; }
         public List<Event> Events { get; set; }
+        public List<DiscountCode> DiscountCoupons { get; set; }
         public string OpeningHours { get; set; }
         public String Type { get; set; }
         public String Website { get; set; }
@@ -29,6 +30,7 @@ namespace SharedLib
             IsSpotlighted = false;
             Promotions = new List<Promotion>();
             Events = new List<Event>();
+            DiscountCoupons = new List<DiscountCode>();
             AllowedTypes = new List<String>
             {
                 "Night Shop",

@@ -4,11 +4,14 @@ namespace SharedLib
 {
     public class Promotion
     {
-        public int Id { get; set; }
+        public String Id { get; set; }
         public String Name { get; set; }
         public String Description { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public int CompanyID { get; set; }
+        public DateTimeOffset StartDate { get; set; }
+        public DateTimeOffset EndDate { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
+        public String CompanyId { get; set; }
+        public Uri PDFUri { get; set; }
     }
 }

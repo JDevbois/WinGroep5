@@ -12,32 +12,34 @@
         <util:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
     </Page.Resources>
     <Hub Header="Dashboard">
-        <HubSection MinWidth="300" Header="Your Companies">
+        <HubSection MinWidth="250" Header="Your Companies">
             <DataTemplate>
-                <StackPanel>
-                    <GridView x:Name="LvCompanies" ItemsSource="{Binding Companies, Mode=TwoWay}" SelectionChanged="LvCompanies_SelectionChanged">
-                        <GridView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Height="100" Width="100" Orientation="Vertical" Background="CadetBlue">
-                                    <Image Source="{Binding Logo, Mode=TwoWay}" Height="70" Width="70" VerticalAlignment="Center" Margin="5" Stretch="UniformToFill" />
-                                    <TextBlock Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
-                        <GridView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
-                    </GridView>
-                    <Button x:Name="btnAddCompany" Content="Add Company" Background="CadetBlue" HorizontalAlignment="Stretch" Command="{Binding AddCompanyCommand}" />
-                </StackPanel>
+                <ScrollViewer>
+                    <StackPanel>
+                        <GridView x:Name="LvCompanies" ItemsSource="{Binding Companies, Mode=TwoWay}" SelectionChanged="LvCompanies_SelectionChanged">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Height="100" Width="100" Orientation="Vertical" Background="CadetBlue">
+                                        <Image Source="{Binding Logo, Mode=TwoWay}" Height="70" Width="70" VerticalAlignment="Center" Margin="5" Stretch="UniformToFill" />
+                                        <TextBlock Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Stretch" TextAlignment="Center" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid MaximumRowsOrColumns="2" Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                        </GridView>
+                        <Button x:Name="btnAddCompany" Content="Add Company" Background="CadetBlue" HorizontalAlignment="Stretch" Command="{Binding AddCompanyCommand}" />
+                    </StackPanel>
+                </ScrollViewer>
             </DataTemplate>
         </HubSection>
 
         <HubSection x:Name="hubDetails" Header="Details"
                     Visibility="{Binding CompanySelected, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
-                    Background="#F4F4F4" MinWidth="500">
+                    Background="#F4F4F4" MinWidth="450">
             <DataTemplate>
                 <StackPanel>
                     <Grid MinWidth="300" DataContext="{Binding SelectedCompany, Mode=TwoWay}">
@@ -94,7 +96,55 @@
 
         <HubSection x:Name="hubPromotions" Header="Promotions"
                     Visibility="{Binding CompanySelected, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
-                    Background="#F9F9F9" MinWidth="300">
+                    Background="#F9F9F9" MinWidth="250">
+            <DataTemplate>
+                <Grid DataContext="{Binding SelectedCompany, Mode=TwoWay}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ListView Grid.Row="0" x:Name="LvEvents" ItemsSource="{Binding Events,Mode=TwoWay}" Header="Events">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" BorderBrush="CadetBlue" BorderThickness="2" Width="230">
+                                    <TextBlock Text="{Binding Name, Mode=TwoWay}" Margin="5" MaxWidth="100" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" />
+                                    <TextBlock Text="{Binding Description, Mode=TwoWay}" Margin="5" MaxWidth="100" TextWrapping="WrapWholeWords" HorizontalAlignment="Right" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <ListView Grid.Row="1" x:Name="LvDiscountCoupons" ItemsSource="{Binding DiscountCoupons, Mode=TwoWay}" Header="Discount Coupons">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name, Mode=TwoWay}" Margin="5" MaxWidth="200" TextWrapping="WrapWholeWords" />
+                                    <TextBlock Text="{Binding Description, Mode=TwoWay}" Margin="5" MaxWidth="200" TextWrapping="WrapWholeWords" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <ListView Grid.Row="2" x:Name="LvPromotions" ItemsSource="{Binding Promotions, Mode=TwoWay}" Header="Other Promotions">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name, Mode=TwoWay}" Margin="5" MaxWidth="200" TextWrapping="WrapWholeWords" />
+                                    <TextBlock Text="{Binding Description, Mode=TwoWay}" Margin="5" MaxWidth="200" TextWrapping="WrapWholeWords" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </DataTemplate>
+        </HubSection>
+        <HubSection x:Name="hubAddPromotions" Header="Add Promotions"
+                    Visibility="{Binding CompanySelected, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
+                    Background="#F9F9F9" MinWidth="250">
             <DataTemplate>
                 <Grid>
                     <Grid.RowDefinitions>

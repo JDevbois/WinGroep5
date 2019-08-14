@@ -97,5 +97,21 @@ namespace WindowsAppEngG01.DataManagers
                 _companies.Add(company);
             }
         }
+
+        internal static void AddEvent(string id, Event promotion)
+        {
+            _companies.Find(c => c.Id.Equals(id)).Events.Add(promotion);
+        }
+
+        internal static void AddDiscountCoupon(string id, DiscountCode promotion)
+        {
+            _companies.Find(c => c.Id.Equals(id)).DiscountCoupons.Add(promotion);
+
+        }
+
+        internal static void AddPromotion(string id, Promotion promotion)
+        {
+            _companies.Find(c => c.Id.Equals(id)).Promotions.Add(promotion);
+        }
     }
 }
