@@ -21,6 +21,7 @@ namespace WindowsAppEngG01.ViewModels
         private bool _companySelected;
 
         public DelegateCommand AddCompanyCommand { get; set; }
+        public DelegateCommand DeleteCompanyCommand { get; set; }
         public DelegateCommand SaveChangesCommand { get; set; }
         public DelegateCommand EditPromotionCommand { get; set; }
         public DelegateCommand EditEventCommand { get; set; }
@@ -45,12 +46,19 @@ namespace WindowsAppEngG01.ViewModels
         {
             Companies = new CompanyManager().GetCompanies().Where(c => c.UserId.Equals(UserManager.LoggedInUser.Id)).ToList();
             AddCompanyCommand = new DelegateCommand(AddCompany);
+            DeleteCompanyCommand = new DelegateCommand(DeleteCompany);
             SaveChangesCommand = new DelegateCommand(SaveChanges);
             EditPromotionCommand = new DelegateCommand(EditPromotion);
             EditEventCommand = new DelegateCommand(EditEvent);
             EditDiscountCouponCommand = new DelegateCommand(EditDiscountCoupon);
             SelectedCompany = CreateTempCompany();
             CompanySelected = false;
+        }
+
+        private void DeleteCompany(object parameter)
+        {
+            CompanyManager.DeleteCompany(SelectedCompany.Id);
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(DashboardPage));
         }
 
         private void AddCompany(object parameter)

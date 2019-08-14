@@ -62,6 +62,11 @@ namespace WindowsAppEngG01.DataManagers
             return null;
         }
 
+        internal static void DeleteCompany(string Companyid)
+        {
+            _companies.RemoveAll(c => c.Id.Equals(Companyid));
+        }
+
         public List<Company> Search(String nameFilter, String typeFilter, bool hasPromotionsFilter)
         {
             var result = _companies;

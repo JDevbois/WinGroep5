@@ -90,7 +90,25 @@
                         <CheckBox Grid.Row="7" Grid.Column="1" Margin="10" IsChecked="{Binding IsSpotlighted, Mode=TwoWay}" VerticalAlignment="Top" />
                     </Grid>
 
-                    <Button Content="Submit Changes" Command="{Binding SaveChangesCommand, Mode=OneTime}" CommandParameter="{Binding SelectedCompany}" HorizontalAlignment="Right" Margin="10"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Button Content="Submit Changes" Command="{Binding SaveChangesCommand, Mode=OneTime}"
+                                Grid.Row="0" Grid.Column="1"
+                                CommandParameter="{Binding SelectedCompany}" HorizontalAlignment="Right" />
+                        <Button Content="Delete Company" Command="{Binding DeleteCompanyCommand, Mode=OneTime}"
+                                Grid.Row="0" Grid.Column="0"
+                                CommandParameter="{Binding SelectedCompany}" HorizontalAlignment="Left" Background="IndianRed" Foreground="White"/>
+                        <TextBlock Text="Careful! This is irreversible" HorizontalAlignment="Left"
+                                   Grid.Row="1" Grid.Column="0" Margin="10, 0, 0, 0"
+                                   FontSize="10" Foreground="IndianRed" VerticalAlignment="Top" />
+                    </Grid>
                 </StackPanel>
             </DataTemplate>
         </HubSection>
