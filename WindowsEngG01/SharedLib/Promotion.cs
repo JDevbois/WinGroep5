@@ -18,6 +18,7 @@ namespace SharedLib
         {
             get { return EndDate.ToString("D"); }
         }
+
         public Promotion()
         {
             Id = Guid.NewGuid().ToString();

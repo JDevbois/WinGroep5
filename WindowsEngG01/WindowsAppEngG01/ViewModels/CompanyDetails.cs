@@ -41,8 +41,9 @@ namespace WindowsAppEngG01.ViewModels
             NotifyPropertyChanged(nameof(Company));
         }
 
-        public List<Promotion> Promotions { get => Company.Promotions; set => _promotions = value; }
-        public List<Event> Events { get => Company.Events; set => _events = value; }
+        public List<Promotion> Promotions { get => Company.Promotions; }
+        public List<Event> Events { get => Company.Events; }
+        public List<DiscountCoupon> DiscountCoupons { get => Company.DiscountCoupons; }
         public string OpeningHours { get => Company.OpeningHours; set => _openingHours = value; }
         public string Type { get => Company.Type; set => _type = value; }
         public string Website { get => Company.Website; set => _website = value; }

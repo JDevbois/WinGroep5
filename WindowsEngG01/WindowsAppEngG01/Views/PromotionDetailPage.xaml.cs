@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WindowsAppEngG01.DataManagers;
+using WindowsAppEngG01.Utils;
 using WindowsAppEngG01.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -33,6 +35,8 @@ namespace WindowsAppEngG01.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            EditPromotionPassThroughElement param = (EditPromotionPassThroughElement)e.Parameter;
+            ViewModel.SetPromotion(CompanyManager.FindPromotion(param.CompanyId, param.PromotionId, param.Identifier));
             this.DataContext = ViewModel;
         }
     }
