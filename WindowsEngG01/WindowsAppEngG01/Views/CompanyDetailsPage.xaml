@@ -16,6 +16,7 @@
             <ColumnDefinition MinWidth="200" Width="auto"/>
             <ColumnDefinition MinWidth="200" Width="auto"/>
             <ColumnDefinition MinWidth="300" Width="auto"/>
+            <ColumnDefinition MinWidth="300" Width="auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -45,5 +46,83 @@
         <TextBox IsEnabled="False" Grid.Row="4" Grid.Column="2" Text="{Binding City}" Margin="5" />
         <TextBox IsEnabled="False" Grid.Row="5" Grid.Column="1" Text="{Binding Website}" Margin="5" />
         <TextBox IsEnabled="False" Grid.Row="6" Grid.Column="1" Text="{Binding OpeningHours}" Margin="5" />
+        <Grid Grid.Column="3" Grid.RowSpan="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Text="Promotions" FontSize="30" Margin="20" />
+            <ListView Grid.Row="1" x:Name="LvEvents" Margin="10, 0, 0, 10" ItemsSource="{Binding Events,Mode=TwoWay}" Header="Events">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="200" x:Name="LvEventsItem" DoubleTapped="LvEventsItem_DoubleTapped">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock MaxWidth="150" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" />
+
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="Until:" FontSize="10" />
+                            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding EndDateString}" FontSize="10" HorizontalAlignment="Right" Margin="0,0,5,0" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView Grid.Row="2" x:Name="LvDiscountCoupons" Margin="10, 0, 0, 10"
+                      ItemsSource="{Binding DiscountCoupons, Mode=TwoWay}" Header="Discount Coupons">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="200" x:Name="LvDiscountCouponsItem" DoubleTapped="LvDiscountCouponsItem_DoubleTapped">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock MaxWidth="150" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" />
+
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="Until:" FontSize="10" />
+                            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding EndDateString}" FontSize="10" HorizontalAlignment="Right" Margin="0,0,5,0" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView Grid.Row="3" x:Name="LvPromotions" Margin="10, 0, 0, 0" ItemsSource="{Binding Promotions, Mode=TwoWay}" Header="Other Promotions">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="200" x:Name="LvPromotionsItem" DoubleTapped="LvPromotionsItem_DoubleTapped">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock MaxWidth="150" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" />
+
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="Until:" FontSize="10" />
+                            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding EndDateString}" FontSize="10" HorizontalAlignment="Right" Margin="0,0,5,0" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </Page>

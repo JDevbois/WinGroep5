@@ -41,6 +41,19 @@ namespace WindowsAppEngG01.Views
             this.DataContext = CompanyDetails;
         }
 
+        private void LvEventsItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
 
+        }
+
+        private void LvDiscountCouponsItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void LvPromotionsItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+
+        }
     }
 }
