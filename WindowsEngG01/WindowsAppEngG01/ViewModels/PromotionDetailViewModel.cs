@@ -40,11 +40,17 @@ namespace WindowsAppEngG01.ViewModels
         }
         public String Start
         {
-            get { return _start; }
+            get
+            {
+                return String.Format("{0} {1}", Promotion.StartDate.ToString("D"), Promotion.StartTime.ToString(@"hh\:mm"));
+            }
         }
         public String End
         {
-            get { return _end; }
+            get
+            {
+                return String.Format("{0} {1}", Promotion.EndDate.ToString("D"), Promotion.EndTime.ToString(@"hh\:mm"));
+            }
         }
         public Uri PDF
         {
