@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedLib;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -14,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WindowsAppEngG01.DataManagers;
+using WindowsAppEngG01.Utils;
 using WindowsAppEngG01.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -43,17 +45,21 @@ namespace WindowsAppEngG01.Views
 
         private void LvEventsItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-
+            Promotion promotion = (Promotion)((Grid)sender).DataContext;
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(PromotionDetail), new EditPromotionPassThroughElement(promotion, new CompanyManager().FindCompanyById(promotion.CompanyId), (int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT));
         }
 
         private void LvDiscountCouponsItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
+            Promotion promotion = (Promotion)((Grid)sender).DataContext;
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(PromotionDetail), new EditPromotionPassThroughElement(promotion, new CompanyManager().FindCompanyById(promotion.CompanyId), (int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE));
 
         }
 
         private void LvPromotionsItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-
+            Promotion promotion = (Promotion)((Grid)sender).DataContext;
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(PromotionDetail), new EditPromotionPassThroughElement(promotion, new CompanyManager().FindCompanyById(promotion.CompanyId), (int)AddPromotionPassThroughElement.IDENTIFIERS.PROMOTION));
         }
     }
 }

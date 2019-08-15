@@ -18,11 +18,7 @@ namespace WindowsAppEngG01.DataManagers
                     UserId = 1,
                     IsSpotlighted = true,
                     Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
-                    Name = "HOGENT",
-                    Promotions = new List<Promotion>
-                    {
-                        new Promotion()
-                    }
+                    Name = "HOGENT"
                 },
                 new Company
                 {
@@ -162,16 +158,19 @@ namespace WindowsAppEngG01.DataManagers
 
         internal static void AddEvent(string id, Event promotion)
         {
+            promotion.CompanyId = id;
             _companies.Find(c => c.Id.Equals(id)).Events.Add(promotion);
         }
 
         internal static void AddDiscountCoupon(string id, DiscountCoupon promotion)
         {
+            promotion.CompanyId = id;
             _companies.Find(c => c.Id.Equals(id)).DiscountCoupons.Add(promotion);
         }
 
         internal static void AddPromotion(string id, Promotion promotion)
         {
+            promotion.CompanyId = id;
             _companies.Find(c => c.Id.Equals(id)).Promotions.Add(promotion);
         }
     }
