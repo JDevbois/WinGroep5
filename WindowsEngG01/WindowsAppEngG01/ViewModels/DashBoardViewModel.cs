@@ -33,10 +33,28 @@ namespace WindowsAppEngG01.ViewModels
             set { _companies = value; NotifyPropertyChanged(nameof(Companies)); }
         }
 
+        public bool CompanyExistsInDB
+        {
+            get
+            {
+                if (SelectedCompany != null)
+                    return CompanyManager.CompanyExists(SelectedCompany.Id);
+                else
+                    return false;
+            }
+        }
+
         public Company SelectedCompany
         {
             get { return _selectedCompany; }
-            set { _selectedCompany = value; CompanySelected = true; NotifyPropertyChanged(nameof(CompanySelected)); NotifyPropertyChanged(nameof(SelectedCompany)); }
+            set
+            {
+                _selectedCompany = value;
+                CompanySelected = true;
+                NotifyPropertyChanged(nameof(CompanySelected));
+                NotifyPropertyChanged(nameof(CompanyExistsInDB));
+                NotifyPropertyChanged(nameof(SelectedCompany));
+            }
         }
 
         public List<String> AllowedTypes { get; set; }
@@ -69,10 +87,11 @@ namespace WindowsAppEngG01.ViewModels
 
         private void AddCompany(object parameter)
         {
-            var temp = CreateTempCompany();
-            new CompanyManager().AddCompany(temp);
-            Companies = new CompanyManager().GetCompanies().Where(c => c.UserId.Equals(UserManager.LoggedInUser.Id)).ToList();
-            Debug.WriteLine(Companies);
+            //var temp = CreateTempCompany();
+            //new CompanyManager().AddCompany(temp);
+            //Companies = new CompanyManager().GetCompanies().Where(c => c.UserId.Equals(UserManager.LoggedInUser.Id)).ToList();
+            //Debug.WriteLine(Companies);
+            SelectedCompany = CreateTempCompany();
         }
 
         private Company CreateTempCompany()
@@ -87,6 +106,7 @@ namespace WindowsAppEngG01.ViewModels
         private void SaveChanges(object parameter)
         {
             new CompanyManager().UpdateCompany((Company)parameter);
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(DashboardPage));
         }
 
         private void EditPromotion(object parameter)

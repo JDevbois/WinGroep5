@@ -144,6 +144,11 @@ namespace WindowsAppEngG01.DataManagers
             return GetCompanies().First(c => c.Id.Equals(id));
         }
 
+        public static bool CompanyExists(String id)
+        {
+            return _companies.Exists(c => c.Id.Equals(id));
+        }
+
         internal void UpdateCompany(Company company)
         {
             if(_companies.FindIndex(c => c.Id == company.Id) >= 0)

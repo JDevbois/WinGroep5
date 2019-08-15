@@ -204,7 +204,7 @@
             </DataTemplate>
         </HubSection>
         <HubSection x:Name="hubAddPromotions" Header="Add Promotions"
-                    Visibility="{Binding CompanySelected, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
+                    Visibility="{Binding CompanyExistsInDB, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
                     Background="#F9F9F9" MinWidth="250">
             <DataTemplate>
                 <Grid>
