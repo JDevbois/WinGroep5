@@ -8,8 +8,6 @@ namespace WindowsAppEngG01.Utils
 {
     public class AddPromotionPassThroughElement
     {
-        private string id;
-        private int identifier;
 
         public enum IDENTIFIERS
         {
@@ -20,11 +18,11 @@ namespace WindowsAppEngG01.Utils
 
         public AddPromotionPassThroughElement(string id, int identifier)
         {
-            this.id = id;
-            this.identifier = identifier;
+            this.Id = id;
+            this.Identifier = identifier;
         }
 
-        public string Id { get => id; set => id = value; }
-        public int Identifier { get => identifier; set => identifier = value; }
+        public string Id { get; set; }
+        public int Identifier { get; set; }
     }
 }

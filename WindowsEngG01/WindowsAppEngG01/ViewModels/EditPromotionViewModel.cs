@@ -20,7 +20,6 @@ namespace WindowsAppEngG01.ViewModels
         private Promotion _promotion;
         private int _identifier;
         private String _companyId;
-        private String _pDFUri;
 
         public Promotion Promotion
         {
