@@ -37,19 +37,8 @@ namespace WindowsAppEngG01.Views
 
         private void CrsItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            if (crsSpotlight.SelectedIndex != -1)
-            {
-                ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(CompanyDetailsPage), ViewModel.SelectedSpotlightCompanyId);
-            }
-        }
-
-        private void CrsItem_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if(crsSpotlight.SelectedIndex != -1)
-            {
-                ViewModel.SelectedSpotlightCompanyId = ViewModel.SpotlightCompanies[crsSpotlight.SelectedIndex].Id;
-            }
-            Debug.WriteLine(crsSpotlight.SelectedIndex);
+            var id = ((Company)((StackPanel)sender).DataContext).Id;
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(CompanyDetailsPage), id);
         }
 
         #region LVSubscriptions event handlers
@@ -66,7 +55,8 @@ namespace WindowsAppEngG01.Views
         {
             if (lvSubscriptions.SelectedIndex != -1)
             {
-                ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(CompanyDetailsPage), ViewModel.SelectedSubscriptionCompanyId);
+                var id = ((Company)((StackPanel)sender).DataContext).Id;
+                ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(CompanyDetailsPage), id);
             }
         }
         #endregion

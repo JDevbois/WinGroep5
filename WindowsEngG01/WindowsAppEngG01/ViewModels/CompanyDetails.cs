@@ -51,7 +51,14 @@ namespace WindowsAppEngG01.ViewModels
 
         public bool IsUserSubscribed
         {
-            get => UserManager.IsUserSubscribed(UserManager.LoggedInUser.Id, Company.Id);
+            get
+            {
+                if (IsLoggedIn)
+                    return UserManager.IsUserSubscribed(UserManager.LoggedInUser.Id, Company.Id);
+                else
+                    return false;
+            }
+
             set
             {
                 UserManager.SetUserSubscription(value, UserManager.LoggedInUser.Id, Company.Id);

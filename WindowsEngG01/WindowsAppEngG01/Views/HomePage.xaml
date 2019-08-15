@@ -42,7 +42,7 @@
                 <DataTemplate>
                     <!-- Carousel content -->
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top" Height="250" BorderBrush="Black" BorderThickness="5" 
-                                x:Name="crsItem" Tapped="CrsItem_Tapped" DoubleTapped="CrsItem_DoubleTapped">
+                                x:Name="crsItem" DoubleTapped="CrsItem_DoubleTapped">
                         <TextBlock HorizontalAlignment="Center" Text="{Binding Name}"></TextBlock>
                         <Image Source="{Binding Logo}"
                                Height="200"
