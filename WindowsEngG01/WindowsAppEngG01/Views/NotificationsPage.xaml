@@ -1,5 +1,6 @@
 ﻿<Page
     x:Class="WindowsAppEngG01.Views.NotificationsPage"
+    x:Name="Page"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WindowsAppEngG01.Views"
@@ -25,7 +26,7 @@
         <ListView Grid.Row="1" ItemsSource="{Binding Notifications}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid DoubleTapped="Grid_DoubleTapped">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="auto" />
@@ -42,8 +43,7 @@
                         <TextBlock VerticalAlignment="Center" Margin="5" Grid.Column="2" Text="{Binding PromotionType}" />
                         <TextBlock VerticalAlignment="Center" Margin="5" Grid.Column="3" Text="{Binding Message}" />
                         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Vertical" Grid.Column="4">
-                            <Button Grid.Column="4" Width="300" Margin="5" Command="{Binding ViewModel.MarkAsReadCommand, ElementName=Page, Mode=OneTime}" CommandParameter="{Binding}">Mark as read</Button>
-                            <Button Grid.Column="5" Width="300" Margin="5" Command="{Binding ViewModel.DeleteNotificationCommand, ElementName=Page, Mode=OneTime}" CommandParameter="{Binding}">Delete</Button>
+                             <Button Grid.Column="5" Width="300" Margin="5" Command="{Binding ViewModel.DeleteNotificationCommand, ElementName=Page, Mode=OneTime}" CommandParameter="{Binding}">Delete</Button>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

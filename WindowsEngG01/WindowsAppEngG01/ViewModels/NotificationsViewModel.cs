@@ -12,8 +12,7 @@ namespace WindowsAppEngG01.Views
 {
     public class NotificationsViewModel : INotifyPropertyChanged
     {
-        public DelegateCommand MarkAsReadCommand;
-        public DelegateCommand DeleteNotificationCommand;
+        public DelegateCommand DeleteNotificationCommand { get; set; }
         private string _userId;
 
         public List<Notification> Notifications
@@ -32,7 +31,6 @@ namespace WindowsAppEngG01.Views
 
         public NotificationsViewModel()
         {
-            MarkAsReadCommand = new DelegateCommand(MarkAsRead);
             DeleteNotificationCommand = new DelegateCommand(DeleteNotification);
         }
 
@@ -41,14 +39,6 @@ namespace WindowsAppEngG01.Views
             var temp = (Notification)parameter;
 
             NotificationManager.DeleteNotification(temp.Id);
-            NotifyPropertyChanged(nameof(Notifications));
-        }
-
-        private void MarkAsRead(object parameter)
-        {
-            var temp = (Notification)parameter;
-
-            NotificationManager.MarkAsRead(temp.Id);
             NotifyPropertyChanged(nameof(Notifications));
         }
 

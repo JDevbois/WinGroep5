@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedLib;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -36,9 +37,16 @@ namespace WindowsAppEngG01.Views
 
         public NotificationsPage()
         {
+            ViewModel = new NotificationsViewModel();
             ViewModel.UserId = UserManager.LoggedInUser.Id;
             this.InitializeComponent();
             this.DataContext = ViewModel;
+        }
+
+        private void Grid_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            var notification = (Notification)((Grid)sender).DataContext;
+            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(CompanyDetailsPage), notification.CompanyId);
         }
     }
 }
