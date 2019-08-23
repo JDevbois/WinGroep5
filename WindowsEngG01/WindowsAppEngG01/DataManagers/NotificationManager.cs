@@ -44,6 +44,11 @@ namespace WindowsAppEngG01.DataManagers
             }
         }
 
+        internal static void MarkAsRead(string id)
+        {
+            notifications.Find(n => n.Id.Equals(id)).IsRead = true;
+        }
+
         public static Notification GetNotification(String id)
         {
             return notifications.Find(n => n.Id.Equals(id));

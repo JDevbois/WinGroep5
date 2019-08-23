@@ -11,6 +11,7 @@ namespace SharedLib
         public String CompanyName { get; set; }
         public String UserId { get; set; }
         public Uri Logo { get; set; }
+        public bool IsRead { get; set; }
         public String PromotionId { get; set; }
         public int PromotionTypeIdentifier { get; set; }
         public String PromotionType { get; set; }
@@ -20,6 +21,7 @@ namespace SharedLib
         public Notification()
         {
             Id = Guid.NewGuid().ToString();
+            IsRead = false;
         }
 
         public enum AllowedNotificationTypes

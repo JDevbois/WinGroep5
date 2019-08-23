@@ -5,12 +5,16 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WindowsAppEngG01.Commands;
 using WindowsAppEngG01.DataManagers;
 
 namespace WindowsAppEngG01.Views
 {
     public class NotificationsViewModel : INotifyPropertyChanged
     {
+        public DelegateCommand MarkAsReadCommand;
+        public DelegateCommand DeleteNotificationCommand;
+        private string _userId;
 
         public List<Notification> Notifications
         {
@@ -20,7 +24,33 @@ namespace WindowsAppEngG01.Views
             }
         }
 
-        public string UserId { get; set; }
+        public string UserId
+        {
+            get { return _userId; }
+            set { _userId = value; NotifyPropertyChanged(nameof(UserId)); }
+        }
+
+        public NotificationsViewModel()
+        {
+            MarkAsReadCommand = new DelegateCommand(MarkAsRead);
+            DeleteNotificationCommand = new DelegateCommand(DeleteNotification);
+        }
+
+        private void DeleteNotification(object parameter)
+        {
+            var temp = (Notification)parameter;
+
+            NotificationManager.DeleteNotification(temp.Id);
+            NotifyPropertyChanged(nameof(Notifications));
+        }
+
+        private void MarkAsRead(object parameter)
+        {
+            var temp = (Notification)parameter;
+
+            NotificationManager.MarkAsRead(temp.Id);
+            NotifyPropertyChanged(nameof(Notifications));
+        }
 
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
