@@ -15,33 +15,60 @@ namespace WindowsAppEngG01.DataManagers
             {
                 new Company
                 {
-                    UserId = 1,
+                    UserId = "1",
                     IsSpotlighted = true,
                     Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
                     Name = "HOGENT"
                 },
                 new Company
                 {
-                    UserId = 2,
+                    UserId = "2",
                     IsSpotlighted = true,
                     Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
                     Name = "UGent"
                 },
                 new Company
                 {
-                    UserId = 3,
+                    UserId = "3",
                     IsSpotlighted = false,
                     Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
                     Name = "Jos's Delhi"
                 },
                 new Company
                 {
-                    UserId = 1,
+                    UserId = "1",
                     IsSpotlighted = false,
                     Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
                     Name = "Heimdal"
                 }
             };
+
+        internal static string ReturnPromotionType(string companyid, string promotionid)
+        {
+            var company = new CompanyManager().FindCompanyById(companyid);
+            foreach (var item in company.Promotions)
+            {
+                if (promotionid.Equals(item.Id))
+                {
+                    return "Promotion";
+                }
+            }
+            foreach (var item in company.Events)
+            {
+                if (promotionid.Equals(item.Id))
+                {
+                    return "Event";
+                }
+            }
+            foreach (var item in company.DiscountCoupons)
+            {
+                if (promotionid.Equals(item.Id))
+                {
+                    return "Discount Coupon";
+                }
+            }
+            return null;
+        }
 
         internal static Promotion FindPromotion(string companyId, string promotionId, int identifier)
         {
@@ -89,37 +116,6 @@ namespace WindowsAppEngG01.DataManagers
             return result;
         }
 
-        internal static void UpdatePromotion(string companyId, Promotion promotion, int identifier)
-        {
-            if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE))
-            {
-                _companies.Find(c => c.Id.Equals(companyId)).DiscountCoupons.Replace(c => c.Id.Equals(promotion.Id), (DiscountCoupon)promotion);
-            } else if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT))
-            {
-                _companies.Find(c => c.Id.Equals(companyId)).Events.Replace(c => c.Id.Equals(promotion.Id), (Event)promotion);
-            } else
-            {
-                _companies.Find(c => c.Id.Equals(companyId)).Promotions.Replace(c => c.Id.Equals(promotion.Id), promotion);
-            }
-        }
-
-        internal static void DeletePromotion(string companyId, Promotion promotion, int identifier)
-        {
-            if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE))
-            {
-                _companies.Find(c => c.Id.Equals(companyId)).DiscountCoupons.RemoveAll(dc => dc.Id.Equals(promotion.Id));
-            }
-            else if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT))
-            {
-                _companies.Find(c => c.Id.Equals(companyId)).Events.RemoveAll(dc => dc.Id.Equals(promotion.Id));
-            }
-            else
-            {
-                _companies.Find(c => c.Id.Equals(companyId)).Promotions.RemoveAll(dc => dc.Id.Equals(promotion.Id));
-            }
-        }
-
-        //TODO filter companies on bool spotlighted
         public List<Company> GetSpotlightCompanies()
         {
             return GetCompanies().Where(c => c.IsSpotlighted).ToList();
@@ -160,18 +156,94 @@ namespace WindowsAppEngG01.DataManagers
         {
             promotion.CompanyId = id;
             _companies.Find(c => c.Id.Equals(id)).Events.Add(promotion);
+
+            foreach (var user in new UserManager().GetUsers())
+            {
+                if (UserManager.IsUserSubscribed(user.Id, promotion.CompanyId))
+                {
+                    NotificationManager.CreateNotification(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.CREATED);
+                }
+            }
         }
 
         internal static void AddDiscountCoupon(string id, DiscountCoupon promotion)
         {
             promotion.CompanyId = id;
             _companies.Find(c => c.Id.Equals(id)).DiscountCoupons.Add(promotion);
+
+            foreach (var user in new UserManager().GetUsers())
+            {
+                if (UserManager.IsUserSubscribed(user.Id, promotion.CompanyId))
+                {
+                    NotificationManager.CreateNotification(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.CREATED);
+                }
+            }
         }
 
+        #region CRUD Promotions
         internal static void AddPromotion(string id, Promotion promotion)
         {
             promotion.CompanyId = id;
             _companies.Find(c => c.Id.Equals(id)).Promotions.Add(promotion);
+
+            foreach (var user in new UserManager().GetUsers())
+            {
+                if (UserManager.IsUserSubscribed(user.Id, promotion.CompanyId))
+                {
+                    NotificationManager.CreateNotification(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.CREATED);
+                }
+            }
         }
+
+        internal static void UpdatePromotion(string companyId, Promotion promotion, int identifier)
+        {
+            if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE))
+            {
+                _companies.Find(c => c.Id.Equals(companyId)).DiscountCoupons.Replace(c => c.Id.Equals(promotion.Id), (DiscountCoupon)promotion);
+            }
+            else if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT))
+            {
+                _companies.Find(c => c.Id.Equals(companyId)).Events.Replace(c => c.Id.Equals(promotion.Id), (Event)promotion);
+            }
+            else
+            {
+                _companies.Find(c => c.Id.Equals(companyId)).Promotions.Replace(c => c.Id.Equals(promotion.Id), promotion);
+            }
+
+            foreach (var user in new UserManager().GetUsers())
+            {
+                if (UserManager.IsUserSubscribed(user.Id, promotion.CompanyId))
+                {
+                    NotificationManager.CreateNotification(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.UPDATED);
+                }
+            }
+        }
+
+        internal static void DeletePromotion(string companyId, Promotion promotion, int identifier)
+        {
+            // TODO CREATE NOTIFICATIONS
+            if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE))
+            {
+                _companies.Find(c => c.Id.Equals(companyId)).DiscountCoupons.RemoveAll(dc => dc.Id.Equals(promotion.Id));
+            }
+            else if (identifier.Equals((int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT))
+            {
+                _companies.Find(c => c.Id.Equals(companyId)).Events.RemoveAll(dc => dc.Id.Equals(promotion.Id));
+            }
+            else
+            {
+                _companies.Find(c => c.Id.Equals(companyId)).Promotions.RemoveAll(dc => dc.Id.Equals(promotion.Id));
+            }
+
+            foreach (var user in new UserManager().GetUsers())
+            {
+                if (UserManager.IsUserSubscribed(user.Id, promotion.CompanyId))
+                {
+                    NotificationManager.CreateNotification(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.DELETED);
+                }
+            }
+        }
+
+        #endregion
     }
 }

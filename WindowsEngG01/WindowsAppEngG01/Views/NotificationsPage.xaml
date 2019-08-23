@@ -22,7 +22,7 @@
                    HorizontalAlignment="Center" 
                    Text="Your Notifications" />
 
-        <ListView Grid.Row="1">
+        <ListView Grid.Row="1" ItemsSource="{Binding Notifications}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -30,15 +30,21 @@
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        
-                        <Image Grid.Column="0" />
-                        <TextBlock Grid.Column="1" Text="CompanyName" />
-                        <TextBlock Grid.Column="2" Text="PromotionType" />
-                        <TextBlock Grid.Column="3" Text="Description" />
-                        <Button Grid.Column="4">Mark as read</Button>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="90" />
+                        </Grid.RowDefinitions>
+
+                        <Image Height="80" Margin="5" Grid.Column="0" Source="{Binding Logo}" />
+                        <TextBlock VerticalAlignment="Center" Margin="5" Grid.Column="1" Text="{Binding CompanyName}" />
+                        <TextBlock VerticalAlignment="Center" Margin="5" Grid.Column="2" Text="{Binding PromotionType}" />
+                        <TextBlock VerticalAlignment="Center" Margin="5" Grid.Column="3" Text="{Binding Message}" />
+                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Vertical" Grid.Column="4">
+                            <Button Grid.Column="4" Width="300" Margin="5" Command="{Binding ViewModel.MarkAsReadCommand, Mode=OneTime}">Mark as read</Button>
+                            <Button Grid.Column="5" Width="300" Margin="5" Command="{Binding ViewModel.DeleteNotificationCommand, Mode=OneTime}">Delete</Button>
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

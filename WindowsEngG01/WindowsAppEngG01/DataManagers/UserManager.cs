@@ -19,27 +19,27 @@ namespace WindowsAppEngG01.DataManagers
             //TODO subscriptions
                 new User
                 {
-                    Id = 1,
+                    Id = "1",
                     Email = "Joren@heimdal.be",
                     Password = "aa",
                     Subscriptions = new CompanyManager().GetCompanies().Select(c => c.Id).ToList()
                 },
                 new User
                 {
-                    Id = 2,
+                    Id = "2",
                     Email = "miriam@heimdal.be",
                     Password = "bb"
                 },
                 new User
                 {
-                    Id = 3,
+                    Id = "3",
                     Email = "stephen@heimdal.be",
                     Password = "cc",
                     Subscriptions = new CompanyManager().GetCompanies().Select(c => c.Id).ToList()
                 },
                 new User
                 {
-                    Id = 4,
+                    Id = "4",
                     Email = "hans@heimdal.be",
                     Password = "dd",
                     Subscriptions = new CompanyManager().GetCompanies().Select(c => c.Id).ToList()
@@ -61,9 +61,9 @@ namespace WindowsAppEngG01.DataManagers
             return GetUsers().First(u => u.Email == email && u.Password == password);
         }
 
-        public static User FindUser(int id)
+        public static User FindUser(string id)
         {
-            return new UserManager().GetUsers().First(u => u.Id == id);
+            return new UserManager().GetUsers().First(u => u.Id.Equals(id));
         }
 
         public List<Company> GetSubscriptionsForUser()
@@ -71,17 +71,17 @@ namespace WindowsAppEngG01.DataManagers
             return new CompanyManager().GetCompanies().Where(c => LoggedInUser.Subscriptions.Contains(c.Id)).ToList();
         }
 
-        private List<User> GetUsers()
+        public List<User> GetUsers()
         {
             return _users;
         }
 
-        internal static bool IsUserSubscribed(int userid, string companyid)
+        internal static bool IsUserSubscribed(string userid, string companyid)
         {
             return FindUser(userid).Subscriptions.Contains(companyid);
         }
 
-        internal static void SetUserSubscription(bool value, int userid, string companyid)
+        internal static void SetUserSubscription(bool value, string userid, string companyid)
         {
             if (!value)
             {

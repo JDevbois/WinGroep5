@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WindowsAppEngG01.DataManagers;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,9 +23,22 @@ namespace WindowsAppEngG01.Views
     /// </summary>
     public sealed partial class NotificationsPage : Page
     {
+
+        public NotificationsViewModel ViewModel
+        {
+            get { return (NotificationsViewModel)GetValue(ViewModelProperty); }
+            set { SetValue(ViewModelProperty, value); }
+        }
+
+        public static readonly DependencyProperty ViewModelProperty =
+    DependencyProperty.Register("ViewModel", typeof(NotificationsViewModel), typeof(NotificationsPage), new PropertyMetadata(0));
+
+
         public NotificationsPage()
         {
+            ViewModel.UserId = UserManager.LoggedInUser.Id;
             this.InitializeComponent();
+            this.DataContext = ViewModel;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace SharedLib
     public class Company
     {
         public String Id { get; set; }
-        public int UserId { get; set; }
+        public String UserId { get; set; }
         public String Name { get; set; }
         public String City { get; set; }
         public String Street { get; set; }
