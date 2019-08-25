@@ -166,7 +166,7 @@ namespace WindowsAppEngG01.ViewModels
                 {
                     throw new Exception("Please make sure none of the fields are empty");
                 }
-                UserManager.UpdateUser(user);
+                UserManager.UpdateUserAsync(user);
                 ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AccountPage));
             } catch (Exception e)
             {

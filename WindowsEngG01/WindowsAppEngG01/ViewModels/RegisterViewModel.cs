@@ -128,7 +128,7 @@ namespace WindowsAppEngG01.ViewModels
                     Password = Password
                 };
 
-                new UserManager().AddUser(user);
+                new UserManager().AddUserAsync(user);
                 UserManager.LoggedInUser = new UserManager().FindUser(Email, Password);
                 ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AccountPage));
             } catch (Exception e)

@@ -1,8 +1,10 @@
-﻿using SharedLib;
+﻿using Newtonsoft.Json;
+using SharedLib;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using WindowsAppEngG01.Utils;
@@ -10,13 +12,10 @@ using WindowsAppEngG01.Utils;
 namespace WindowsAppEngG01.DataManagers
 {
     //TODO not storing passwords in clear text
-    //TODO subscriptions should be handled by a subscription manager
     public class UserManager
     {
-        //TODO should be from db
         private static List<User> _users = new List<User>
             {
-            //TODO subscriptions
                 new User
                 {
                     Id = "1",
@@ -47,23 +46,42 @@ namespace WindowsAppEngG01.DataManagers
             };
 
         public static User LoggedInUser { get; set; }
+        public static string POSTString = "http://localhost:54089/api/Users";
 
-        public void AddUser(User user)
+        public async Task AddUserAsync(User user)
         {
-            _users.Add(user);
+            if (UseBackend.Backend)
+            {
+                var userJson = JsonConvert.SerializeObject(user);
+
+                HttpClient client = new HttpClient();
+                var res = await client.PostAsync(POSTString, new StringContent(userJson, System.Text.Encoding.UTF8, "application/json")).ConfigureAwait(false);
+
+            } else
+            {
+                _users.Add(user);
+            }
         }
 
         public User FindUser(
             string email,
             string password)
         {
-            //TODO get data from database
             return GetUsers().First(u => u.Email == email && u.Password == password);
         }
 
         public static User FindUser(string id)
         {
-            return new UserManager().GetUsers().First(u => u.Id.Equals(id));
+            if (UseBackend.Backend)
+            {
+                HttpClient client = new HttpClient();
+                var json = client.GetStringAsync(new Uri(String.Format("{0}/{1}", POSTString, id))).Result;
+                var res = JsonConvert.DeserializeObject<User>(json);
+                return res;
+            } else
+            {
+                return new UserManager().GetUsers().First(u => u.Id.Equals(id));
+            }
         }
 
         public List<Company> GetSubscriptionsForUser()
@@ -73,6 +91,13 @@ namespace WindowsAppEngG01.DataManagers
 
         public List<User> GetUsers()
         {
+            if (UseBackend.Backend)
+            {
+                HttpClient client = new HttpClient();
+                var json = client.GetStringAsync(new Uri(POSTString)).Result;
+                var lst = JsonConvert.DeserializeObject<List<User>>(json);
+                return lst;
+            }
             return _users;
         }
 
@@ -103,8 +128,15 @@ namespace WindowsAppEngG01.DataManagers
             LoggedInUser = null;
         }
 
-        internal static void UpdateUser(User user)
+        internal static async Task UpdateUserAsync(User user)
         {
+            if (UseBackend.Backend)
+            {
+                var userJson = JsonConvert.SerializeObject(user);
+
+                HttpClient client = new HttpClient();
+                var res = await client.PutAsync(String.Format("{0}/{1}", POSTString, user.Id), new StringContent(userJson, System.Text.Encoding.UTF8, "application/json"));
+            }
             _users.Replace(u => u.Id.Equals(user.Id), user);
         }
     }
