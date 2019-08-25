@@ -38,6 +38,7 @@ namespace SharedLib
                 "Food Shop",
                 "Clothes Shop",
                 "Restaurant",
+                "School",
                 "Hotel",
                 "Other"
             };
