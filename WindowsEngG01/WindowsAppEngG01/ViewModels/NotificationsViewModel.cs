@@ -38,7 +38,7 @@ namespace WindowsAppEngG01.Views
         {
             var temp = (Notification)parameter;
 
-            NotificationManager.DeleteNotification(temp.Id);
+            NotificationManager.DeleteNotificationAsync(temp.Id);
             NotifyPropertyChanged(nameof(Notifications));
         }
 

@@ -22,5 +22,7 @@ namespace BackendAPI.Models
         public System.Data.Entity.DbSet<BackendAPI.Models.Company> Companies { get; set; }
 
         public System.Data.Entity.DbSet<BackendAPI.Models.Promotion> Promotions { get; set; }
+
+        public System.Data.Entity.DbSet<BackendAPI.Models.Notification> Notifications { get; set; }
     }
 }

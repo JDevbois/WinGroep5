@@ -142,7 +142,7 @@ namespace WindowsAppEngG01.DataManagers
             {
                 if (UserManager.IsUserSubscribed(user.Id, promotion.CompanyId))
                 {
-                    NotificationManager.CreateNotification(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.CREATED);
+                    NotificationManager.CreateNotificationAsync(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.CREATED);
                 }
             }
         }
@@ -175,7 +175,7 @@ namespace WindowsAppEngG01.DataManagers
             {
                 if (UserManager.IsUserSubscribed(user.Id, promotion.CompanyId))
                 {
-                    NotificationManager.CreateNotification(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.CREATED);
+                    NotificationManager.CreateNotificationAsync(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.CREATED);
                 }
             }
         }
@@ -189,7 +189,7 @@ namespace WindowsAppEngG01.DataManagers
             {
                 if (UserManager.IsUserSubscribed(user.Id, promotion.CompanyId))
                 {
-                    NotificationManager.CreateNotification(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.CREATED);
+                    NotificationManager.CreateNotificationAsync(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.CREATED);
                 }
             }
         }
@@ -214,7 +214,7 @@ namespace WindowsAppEngG01.DataManagers
             {
                 if (UserManager.IsUserSubscribed(user.Id, promotion.CompanyId))
                 {
-                    NotificationManager.CreateNotification(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.UPDATED);
+                    NotificationManager.CreateNotificationAsync(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.UPDATED);
                 }
             }
         }
@@ -238,7 +238,7 @@ namespace WindowsAppEngG01.DataManagers
             {
                 if (UserManager.IsUserSubscribed(user.Id, promotion.CompanyId))
                 {
-                    NotificationManager.CreateNotification(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.DELETED);
+                    NotificationManager.CreateNotificationAsync(user.Id, promotion.CompanyId, promotion.Id, (int)Notification.AllowedNotificationTypes.DELETED);
                 }
             }
         }
