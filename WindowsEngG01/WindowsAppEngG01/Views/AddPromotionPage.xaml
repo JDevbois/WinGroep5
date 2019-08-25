@@ -9,6 +9,50 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="Sizes">
+                <VisualState x:Name="Large">
+                    <VisualState.Setters>
+                        <Setter Target="textBox.(Grid.Row)" Value="5"/>
+                        <Setter Target="btnPDF.(Grid.Row)" Value="5"/>
+                        <Setter Target="btnPDF.(Grid.Column)" Value="2"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1004"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Medium">
+                    <VisualState.Setters>
+                        <Setter Target="textBox.(Grid.Row)" Value="5"/>
+                        <Setter Target="btnPDF.(Grid.Row)" Value="5"/>
+                        <Setter Target="btnPDF.(Grid.Column)" Value="2"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Mobile">
+                    <VisualState.Setters>
+                        <Setter Target="datePicker.(FrameworkElement.Width)" Value="NaN"/>
+                        <Setter Target="lblPDF.(TextBlock.Text)" Value="Insert PDF"/>
+                        <Setter Target="dpEnd.(FrameworkElement.Width)" Value="NaN"/>
+                        <Setter Target="timePicker.(Grid.Row)" Value="4"/>
+                        <Setter Target="timePicker.(Grid.Column)" Value="1"/>
+                        <Setter Target="dpEnd.(Grid.Row)" Value="5"/>
+                        <Setter Target="tpEnd.(Grid.Column)" Value="1"/>
+                        <Setter Target="tpEnd.(Grid.Row)" Value="6"/>
+                        <Setter Target="textBox.(Grid.Row)" Value="7"/>
+                        <Setter Target="btnSubmit.(Grid.Column)" Value="1"/>
+                        <Setter Target="btnSubmit.(Grid.Row)" Value="10"/>
+                        <Setter Target="btnPDF.(Grid.Row)" Value="8"/>
+                        <Setter Target="textBlock.(Grid.Row)" Value="9"/>
+                        <Setter Target="btnSubmit.(FrameworkElement.HorizontalAlignment)" Value="Stretch"/>
+                        <Setter Target="btnSubmit.(FrameworkElement.Width)" Value="NaN"/>
+                        <Setter Target="textBlock.(FrameworkElement.HorizontalAlignment)" Value="Center"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
@@ -23,33 +67,34 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding PromotionTypeTitle, Mode=TwoWay}" HorizontalAlignment="Center" FontSize="30sp" Margin="20" />
-        
+
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Name" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" />
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Description" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" />
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Start" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" />
         <TextBlock Grid.Row="4" Grid.Column="0" Text="End" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" />
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Insert PDF of your coupon/event" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <TextBlock x:Name="lblPDF" Grid.Row="5" Grid.Column="0" Text="Insert PDF of your coupon/event" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" />
 
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}" MaxWidth="400" TextWrapping="Wrap" PlaceholderText="Name..." Margin="10" VerticalAlignment="Center" />
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Description, Mode=TwoWay}" MaxWidth="400" TextWrapping="Wrap" PlaceholderText="Description..." Margin="10" VerticalAlignment="Center" />
+        <TextBox x:Name="txtName" Grid.Row="1" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}" MaxWidth="400" TextWrapping="Wrap" PlaceholderText="Name..." Margin="10" VerticalAlignment="Center" />
+        <TextBox x:Name="txtDescription" Grid.Row="2" Grid.Column="1" Text="{Binding Description, Mode=TwoWay}" MaxWidth="400" TextWrapping="Wrap" PlaceholderText="Description..." Margin="10" VerticalAlignment="Center" />
 
-        <DatePicker Grid.Row="3" Grid.Column="1" Margin="10" Date="{Binding StartDate, Mode=TwoWay}" Width="400" />
-        <TimePicker Grid.Row="3" Grid.Column="2" Margin="10" Time="{Binding StartTime, Mode=TwoWay}" />
+        <DatePicker x:Name="datePicker" Grid.Row="3" Grid.Column="1" Margin="10" Date="{Binding StartDate, Mode=TwoWay}" Width="400" />
+        <TimePicker x:Name="timePicker" Grid.Row="3" Grid.Column="2" Margin="10" Time="{Binding StartTime, Mode=TwoWay}" HorizontalAlignment="Stretch" />
 
-        <DatePicker Grid.Row="4" Grid.Column="1" Margin="10" Date="{Binding EndDate, Mode=TwoWay}" Width="400" />
-        <TimePicker Grid.Row="4" Grid.Column="2" Margin="10" Time="{Binding EndTime, Mode=TwoWay}" />
+        <DatePicker x:Name="dpEnd" Grid.Row="4" Grid.Column="1" Margin="10" Date="{Binding EndDate, Mode=TwoWay}" Width="400" />
+        <TimePicker x:Name="tpEnd" Grid.Row="4" Grid.Column="2" Margin="10" Time="{Binding EndTime, Mode=TwoWay}" HorizontalAlignment="Stretch" />
 
-        <TextBox Grid.Row="5" Grid.Column="1" Margin="10" Text="{Binding PDFUri, Mode=TwoWay}" MaxWidth="400" IsReadOnly="False" PlaceholderText="PDF URI" />
-        
-        <Button Grid.Row="5" Grid.Column="2" Margin="10" 
-                Width="242" Content="Upload PDF" Command="{Binding UploadPDFCommand, Mode=OneTime}" />
-        <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Foreground="IndianRed" HorizontalAlignment="Right" Margin="10" Text="{Binding Feedback}" />
+        <TextBox x:Name="textBox" Grid.Row="8" Grid.Column="1" Margin="10" Text="{Binding PDFUri, Mode=TwoWay}" MaxWidth="400" IsReadOnly="False" PlaceholderText="PDF URI" />
 
-        <Button Grid.Row="6" Grid.Column="2" Margin="10"
+        <Button x:Name="btnPDF" Grid.Row="9" Grid.Column="1" Margin="10" Content="Upload PDF" Command="{Binding UploadPDFCommand, Mode=OneTime}" HorizontalAlignment="Stretch" />
+        <TextBlock x:Name="textBlock" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Foreground="IndianRed" HorizontalAlignment="Right" Margin="10" Text="{Binding Feedback}" />
+
+        <Button x:Name="btnSubmit" Grid.Row="6" Grid.Column="2" Margin="10"
                 Content="Submit Promotion"
                 Command="{Binding SubmitPromotionCommand, Mode=OneTime}"
                 Width="242"/>

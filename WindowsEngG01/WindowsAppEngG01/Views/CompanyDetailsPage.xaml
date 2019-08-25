@@ -12,11 +12,46 @@
         <util:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
     </Page.Resources>
     <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="Sizes">
+                <VisualState x:Name="Large">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1004"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Medium">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Small">
+                    <VisualState.Setters>
+                        <Setter Target="lblTitle.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target="grid.(Grid.Row)" Value="7"/>
+                        <Setter Target="grid.(Grid.Column)" Value="0"/>
+                        <Setter Target="grid.(Grid.ColumnSpan)" Value="4"/>
+                        <Setter Target="cbSubscribe.(Grid.Column)" Value="3"/>
+                        <Setter Target="cbSubscribe.(FrameworkElement.HorizontalAlignment)" Value="Left"/>
+                        <Setter Target="cbSubscribe.(ContentControl.Content)" Value="&lt;3"/>
+                        <Setter Target="txtName.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target="txtWebsite.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target="txtOpeningHr.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target="lblOpeningHrs.(TextBlock.FontSize)" Value="12"/>
+                        <Setter Target="lblOpeningHrs.(FrameworkElement.HorizontalAlignment)" Value="Left"/>
+                        <Setter Target="lblOpeningHrs.(FrameworkElement.VerticalAlignment)" Value="Center"/>
+                        <Setter Target="txtStreet.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="txtNumber.(Grid.Column)" Value="3"/>
+                        <Setter Target="txtPostalCode.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="txtCity.(Grid.Column)" Value="3"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="200" Width="auto"/>
-            <ColumnDefinition MinWidth="200" Width="auto"/>
-            <ColumnDefinition MinWidth="300" Width="auto"/>
-            <ColumnDefinition MinWidth="300" Width="auto" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -26,10 +61,13 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Company Details" FontSize="30sp" Margin="20" Grid.Row="0" />
-        <CheckBox Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Content="Subscribe?" 
+        <TextBlock x:Name="lblTitle" Text="Company Details" FontSize="30sp" Margin="20" Grid.Row="0" />
+        <CheckBox x:Name="cbSubscribe" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Content="Subscribe?" 
                   Visibility="{Binding IsLoggedIn, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
                   IsChecked="{Binding IsUserSubscribed, Mode=TwoWay}"/>
 
@@ -37,16 +75,16 @@
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Name" Margin="5" />
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Address" Margin="5" />
         <TextBlock Grid.Row="5" Grid.Column="0" Text="Website" Margin="5" />
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="Opening Hours" Margin="5" />
-        
-        <TextBox IsEnabled="False" Grid.Row="2" Grid.Column="1" Text="{Binding Name}" Margin="5" />
-        <TextBox IsEnabled="False" Grid.Row="3" Grid.Column="1" Text="{Binding Street}" Margin="5" />
-        <TextBox IsEnabled="False" Grid.Row="3" Grid.Column="2" Text="{Binding Number}" Margin="5" />
-        <TextBox IsEnabled="False" Grid.Row="4" Grid.Column="1" Text="{Binding PostalCode}" Margin="5" />
-        <TextBox IsEnabled="False" Grid.Row="4" Grid.Column="2" Text="{Binding City}" Margin="5" />
-        <TextBox IsEnabled="False" Grid.Row="5" Grid.Column="1" Text="{Binding Website}" Margin="5" />
-        <TextBox IsEnabled="False" Grid.Row="6" Grid.Column="1" Text="{Binding OpeningHours}" Margin="5" />
-        <Grid Grid.Column="3" Grid.RowSpan="8">
+        <TextBlock x:Name="lblOpeningHrs" Grid.Row="6" Grid.Column="0" Text="Opening Hours" Margin="5" />
+
+        <TextBox x:Name="txtName" IsEnabled="False" Grid.Row="2" Grid.Column="1" Text="{Binding Name}" Margin="5" />
+        <TextBox x:Name="txtStreet" IsEnabled="False" Grid.Row="3" Grid.Column="1" Text="{Binding Street}" Margin="5" />
+        <TextBox x:Name="txtNumber" IsEnabled="False" Grid.Row="3" Grid.Column="2" Text="{Binding Number}" Margin="5" />
+        <TextBox x:Name="txtPostalCode" IsEnabled="False" Grid.Row="4" Grid.Column="1" Text="{Binding PostalCode}" Margin="5" />
+        <TextBox x:Name="txtCity" IsEnabled="False" Grid.Row="4" Grid.Column="2" Text="{Binding City}" Margin="5" />
+        <TextBox x:Name="txtWebsite" IsEnabled="False" Grid.Row="5" Grid.Column="1" Text="{Binding Website}" Margin="5" />
+        <TextBox x:Name="txtOpeningHr" IsEnabled="False" Grid.Row="6" Grid.Column="1" Text="{Binding OpeningHours}" Margin="5" />
+        <Grid x:Name="grid" Grid.Column="3" Grid.RowSpan="8">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
