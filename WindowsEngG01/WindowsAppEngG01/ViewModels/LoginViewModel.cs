@@ -59,8 +59,15 @@ namespace WindowsAppEngG01.ViewModels
                 passwordBox.Password = string.Empty;
 
                 ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AccountPage));
-            } catch (Exception e)
+            }
+            catch (InvalidOperationException e)
             {
+                Debug.WriteLine(e.Message);
+                Feedback = "No user found with these credentials.";
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.GetType().ToString());
                 Debug.WriteLine(e.Message);
                 Feedback = e.Message;
 

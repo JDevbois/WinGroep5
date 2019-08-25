@@ -110,6 +110,11 @@ namespace WindowsAppEngG01.ViewModels
                 {
                     throw new Exception("Please make sure you filled out all fields.");
                 }
+                if (!IsEmailValid(Email))
+                {
+                    throw new Exception("Please make sure you entered an actual email address");
+                }
+
                 User user = new User
                 {
                     Email = Email,
@@ -136,6 +141,20 @@ namespace WindowsAppEngG01.ViewModels
         {
             return !(String.IsNullOrEmpty(Email) || String.IsNullOrEmpty(FirstName) || String.IsNullOrEmpty(LastName) || String.IsNullOrEmpty(Street) || String.IsNullOrEmpty(Number)
                 || String.IsNullOrEmpty(PostalCode) || String.IsNullOrEmpty(City) || String.IsNullOrEmpty(Password));
+        }
+
+        public bool IsEmailValid(string emailaddress)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
 
         public bool CanRegister(object parameter)
