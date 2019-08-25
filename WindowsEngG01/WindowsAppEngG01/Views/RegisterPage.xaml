@@ -44,5 +44,6 @@
         <PasswordBox x:Name="txtPassword" Password="{Binding Password, Mode=TwoWay}" PlaceholderText="Password" Grid.Row="5" Grid.Column="1" Margin="0,0, 0, 10" />
         <PasswordBox x:Name="txtPasswordConfirm" Password="{Binding PasswordConfirm, Mode=TwoWay}" PlaceholderText="Confirm Password" Grid.Row="5" Grid.Column="2" Margin="0,0, 0, 10" />
         <Button x:Name="btnRegister" Command="{Binding RegisterCommand}" Grid.Row="5" Grid.Column="3" Content="Register" HorizontalAlignment="Right" />
+        <TextBlock Text="{Binding Feedback}" Margin="10" Foreground="IndianRed" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.ColumnSpan="3" Grid.Row="6" />
     </Grid>
 </Page>

@@ -95,7 +95,10 @@
                 HorizontalAlignment="Left"
                 Command="{Binding ChangePasswordCommand, Mode=OneTime}"
                 Margin="0,0,0,30">Submit Password Change</Button>
-        
+
+        <TextBlock Foreground="IndianRed" Text="{Binding PasswordFeedback}" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top" />
+        <TextBlock Foreground="IndianRed" Text="{Binding Feedback}" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" Margin="10" HorizontalAlignment="Right" />
+
         <Button Content="Log out" 
                 x:Name="btnLogOut"
                 Grid.Row="8" Grid.Column="3"

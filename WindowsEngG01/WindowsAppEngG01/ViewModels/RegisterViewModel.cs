@@ -29,6 +29,8 @@ namespace WindowsAppEngG01.ViewModels
 
         public DelegateCommand RegisterCommand { get; set; }
 
+        private String feedback;
+
         public string Email
         {
             get { return _email; }
@@ -82,6 +84,13 @@ namespace WindowsAppEngG01.ViewModels
             get { return _passwordConfirm; }
             set { _passwordConfirm = value; NotifyPropertyChanged(nameof(PasswordConfirm)); }
         }
+
+        public string Feedback { get => feedback; set
+            {
+                feedback = value;
+                NotifyPropertyChanged(nameof(Feedback));
+            }
+        }
         #endregion
 
         public RegisterViewModel()
@@ -93,32 +102,33 @@ namespace WindowsAppEngG01.ViewModels
         {
             try
             {
-                //TODO set ID at some point
-                if(Password == PasswordConfirm && NoPropertyIsNull() )
+                if (Password != PasswordConfirm)
                 {
-                    User user = new User
-                    {
-                        Email = Email,
-                        FirstName = FirstName,
-                        LastName = LastName,
-                        Street = Street,
-                        Number = Number,
-                        PostalCode = PostalCode,
-                        City = City,
-                        Password = Password
-                    };
-
-                    new UserManager().AddUser(user);
-                    UserManager.LoggedInUser = new UserManager().FindUser(Email, Password);
-                    ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AccountPage));
-                } else
-                {
-                    // TODO display in app
-                    Debug.WriteLine("one of the arguments was null or empty");
+                    throw new Exception("Password fields do not match.");
                 }
+                if (!NoPropertyIsNull())
+                {
+                    throw new Exception("Please make sure you filled out all fields.");
+                }
+                User user = new User
+                {
+                    Email = Email,
+                    FirstName = FirstName,
+                    LastName = LastName,
+                    Street = Street,
+                    Number = Number,
+                    PostalCode = PostalCode,
+                    City = City,
+                    Password = Password
+                };
+
+                new UserManager().AddUser(user);
+                UserManager.LoggedInUser = new UserManager().FindUser(Email, Password);
+                ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AccountPage));
             } catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
+                Feedback = e.Message;
             }
         }
 

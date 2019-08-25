@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -21,7 +22,21 @@ namespace WindowsAppEngG01.ViewModels
         private string newPassword;
         private string confirmPassword;
 
+        private string _feedback;
+        private string _passwordFeedback;
+
         public DelegateCommand LogoutCommand { get; set; }
+        public String Feedback
+        {
+            get { return _feedback; }
+            set { _feedback = value; NotifyPropertyChanged(nameof(Feedback)); }
+        }
+
+        public String PasswordFeedback
+        {
+            get { return _passwordFeedback; }
+            set { _passwordFeedback = value; NotifyPropertyChanged(nameof(PasswordFeedback)); }
+        }
         public DelegateCommand SubmitChangesCommand { get; set; }
         public DelegateCommand ChangePasswordCommand { get; set; }
 
@@ -128,19 +143,40 @@ namespace WindowsAppEngG01.ViewModels
         {
             try
             {
+                if (!CanChangePassword(parameter))
+                {
+                    throw new Exception("Please verify if you've filled out the password fields correctly.");
+                }
                 UserManager.FindUser(user.Id).Password = NewPassword;
                 Logout(parameter);
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
+                PasswordFeedback = e.Message;
             }
         }
 
         private void SubmitChanges(object parameter)
         {
-            UserManager.UpdateUser(user);
-            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AccountPage));
+            try
+            {
+                if (!NoFieldsAreEmpty())
+                {
+                    throw new Exception("Please make sure none of the fields are empty");
+                }
+                UserManager.UpdateUser(user);
+                ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(AccountPage));
+            } catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                Feedback = e.Message;
+            }
+        }
+
+        private bool NoFieldsAreEmpty()
+        {
+            return !(String.IsNullOrEmpty(user.Email) || String.IsNullOrEmpty(user.FirstName) || String.IsNullOrEmpty(user.LastName) || String.IsNullOrEmpty(user.Street) || String.IsNullOrEmpty(user.Number) || String.IsNullOrEmpty(user.City) || String.IsNullOrEmpty(user.PostalCode));
         }
 
         public AccountViewModel()

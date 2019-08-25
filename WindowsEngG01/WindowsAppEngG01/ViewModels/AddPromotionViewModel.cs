@@ -29,6 +29,12 @@ namespace WindowsAppEngG01.ViewModels
             }
         }
 
+        public String Feedback
+        {
+            get { return _feedback; }
+            set { _feedback = value; NotifyPropertyChanged(nameof(Feedback)); }
+        }
+
         private void SetPromotionType(int value)
         {
             if (value == (int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT)
@@ -48,6 +54,7 @@ namespace WindowsAppEngG01.ViewModels
         private Promotion Promotion { get; set; }
 
         private int _identifier;
+        private string _feedback;
 
         public DelegateCommand SubmitPromotionCommand { get; set; }
         public DelegateCommand UploadPDFCommand { get; set; }
@@ -129,35 +136,52 @@ namespace WindowsAppEngG01.ViewModels
 
         public bool NoFieldsAreNull()
         {
-            return !String.IsNullOrEmpty(Name) && !String.IsNullOrEmpty(Description);
+            return !String.IsNullOrEmpty(Name) && !String.IsNullOrEmpty(Description) && !String.IsNullOrEmpty(PDFUri.LocalPath);
         }
 
         private bool IsStartNotLaterThanEnd()
         {
-            return DateTimeOffset.Compare(StartDate, EndDate) < 0;
+            var startTemp = StartDate;
+            var endTemp = EndDate;
+
+            startTemp.AddHours(StartTime.Hours);
+            startTemp.AddMinutes(StartTime.Minutes);
+
+            endTemp.AddHours(EndTime.Hours);
+            endTemp.AddMinutes(EndTime.Minutes);
+
+            return DateTimeOffset.Compare(startTemp, endTemp) < 0;
         }
 
         private void SubmitPromotion(object parameter)
         {
-
-            if (NoFieldsAreNull() && IsStartNotLaterThanEnd())
+            try
             {
-                if (Identifier == (int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT)
+                if (NoFieldsAreNull())
                 {
-                    CompanyManager.AddEvent(Company.Id, (Event)Promotion);
+                    throw new Exception("Please make sure none of the fields are empty");
                 }
-                else if (Identifier == (int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE)
+                if (IsStartNotLaterThanEnd())
                 {
-                    CompanyManager.AddDiscountCoupon(Company.Id, (DiscountCoupon)Promotion);
+                    throw new Exception("The Start Time and Date cannot be later than the End Time and Date");
                 }
-                else
-                {
-                    CompanyManager.AddPromotion(Company.Id, Promotion);
-                }
-            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(DashboardPage));
-            } else
+                    if (Identifier == (int)AddPromotionPassThroughElement.IDENTIFIERS.EVENT)
+                    {
+                        CompanyManager.AddEvent(Company.Id, (Event)Promotion);
+                    }
+                    else if (Identifier == (int)AddPromotionPassThroughElement.IDENTIFIERS.DISCOUNTCODE)
+                    {
+                        CompanyManager.AddDiscountCoupon(Company.Id, (DiscountCoupon)Promotion);
+                    }
+                    else
+                    {
+                        CompanyManager.AddPromotion(Company.Id, Promotion);
+                    }
+                    ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(DashboardPage));
+            } catch (Exception e)
             {
-                // TODO feedback
+                Debug.WriteLine(e.Message);
+                Feedback = e.Message;
             }
         }
 
@@ -171,23 +195,30 @@ namespace WindowsAppEngG01.ViewModels
 
         private async void UploadPDFAsync(object parameter)
         {
-            var picker = new Windows.Storage.Pickers.FileOpenPicker();
-            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.List;
-            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
-            picker.FileTypeFilter.Add(".pdf");
+            try
+            {
+                var picker = new Windows.Storage.Pickers.FileOpenPicker();
+                picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.List;
+                picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+                picker.FileTypeFilter.Add(".pdf");
 
-            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
-            if (file != null)
+                Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
+                if (file != null)
+                {
+                    // Application now has read/write access to the picked file
+                    PDFUri = new Uri(file.Path);
+                    Debug.WriteLine("Picked pdf: " + file.Path);
+                }
+                else
+                {
+                    Debug.WriteLine("Operation cancelled.");
+                    throw new Exception("No pdf was selected");
+                }
+            } catch (Exception e)
             {
-                // Application now has read/write access to the picked file
-                PDFUri = new Uri(file.Path);
-                Debug.WriteLine("Picked photo: " + file.Path);
+                Debug.WriteLine(e.Message);
+                Feedback = e.Message;
             }
-            else
-            {
-                Debug.WriteLine("Operation cancelled.");
-            }
-            Debug.WriteLine("Upload PDF called");
         }
 
         #region INotifyPropertyChanged Members

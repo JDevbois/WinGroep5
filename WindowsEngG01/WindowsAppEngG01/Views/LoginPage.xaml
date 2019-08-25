@@ -37,6 +37,7 @@
                     CommandParameter="{Binding ElementName=passwordBox}"
                     Visibility="{Binding CanLogin, Converter={StaticResource booleanToVisibilityConverter}, Mode=TwoWay}"
                     HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Feedback}" Margin="10" Foreground="IndianRed" HorizontalAlignment="Left" />
         </StackPanel>
         <TextBlock Text="Don't have an account yet? Click here to register."
                    Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"

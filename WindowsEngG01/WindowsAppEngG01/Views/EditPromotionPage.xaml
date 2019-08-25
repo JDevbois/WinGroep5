@@ -54,6 +54,9 @@
                 Content="Submit Changes"
                 Command="{Binding SubmitPromotionCommand, Mode=OneTime}"
                 Width="242"/>
+
+        <TextBlock Text="{Binding Feedback}" Margin="10" Foreground="IndianRed" HorizontalAlignment="Right" Grid.ColumnSpan="2" Grid.Row="6" />
+
         <Button Grid.Row="7" Grid.Column="2" 
                 Content="Delete Promotion" Margin="10, 20, 10, 0"
                 Command="{Binding DeletePromotionCommand, Mode=OneTime}"

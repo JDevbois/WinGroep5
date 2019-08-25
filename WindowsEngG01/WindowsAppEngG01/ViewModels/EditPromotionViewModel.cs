@@ -20,6 +20,7 @@ namespace WindowsAppEngG01.ViewModels
         private Promotion _promotion;
         private int _identifier;
         private String _companyId;
+        private String _feedback;
 
         public Promotion Promotion
         {
@@ -37,6 +38,12 @@ namespace WindowsAppEngG01.ViewModels
         {
             get { return _companyId; }
             set { _companyId = value; NotifyPropertyChanged(nameof(CompanyId)); }
+        }
+
+        public String Feedback
+        {
+            get { return _feedback; }
+            set { _feedback = value; NotifyPropertyChanged(nameof(Feedback)); }
         }
 
         public String PromotionTypeTitle
@@ -107,23 +114,39 @@ namespace WindowsAppEngG01.ViewModels
 
         private bool IsStartNotLaterThanEnd()
         {
-            return DateTimeOffset.Compare(StartDate, EndDate) < 0;
+            var startTemp = StartDate;
+            var endTemp = EndDate;
+
+            startTemp.AddHours(StartTime.Hours);
+            startTemp.AddMinutes(StartTime.Minutes);
+
+            endTemp.AddHours(EndTime.Hours);
+            endTemp.AddMinutes(EndTime.Minutes);
+
+            return DateTimeOffset.Compare(startTemp, endTemp) < 0;
         }
 
         private void SubmitPromotion(object parameter)
         {
-            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(DashboardPage));
-
-            if (NoFieldsAreNull() && IsStartNotLaterThanEnd())
+            try
             {
+                if (NoFieldsAreNull())
+                {
+                    throw new Exception("Please make sure none of the fields are empty");
+                }
+                if (IsStartNotLaterThanEnd())
+                {
+                    throw new Exception("The Start Time and Date cannot be later than the End Time and Date");
+                }
                 CompanyManager.UpdatePromotion(CompanyId, Promotion, Identifier);
                 Debug.WriteLine("Update Promotion Called");
 
                 ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(DashboardPage));
             }
-            else
+            catch (Exception e)
             {
-                // TODO feedback
+                Debug.WriteLine(e.Message);
+                Feedback = e.Message;
             }
         }
 

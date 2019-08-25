@@ -16,6 +16,7 @@ namespace WindowsAppEngG01.ViewModels
     public class LoginViewModel : INotifyPropertyChanged
     {
         private string _email;
+        private String _feedback;
 
         public string Email {
             get { return _email; }
@@ -24,6 +25,12 @@ namespace WindowsAppEngG01.ViewModels
 
         public bool IsAuthenticated { get; set; }
         public DelegateCommand LoginCommand { get; set; }
+
+        public String Feedback
+        {
+            get { return _feedback; }
+            set { _feedback = value; NotifyPropertyChanged(nameof(Feedback)); }
+        }
 
         public LoginViewModel()
         {
@@ -38,6 +45,10 @@ namespace WindowsAppEngG01.ViewModels
 
             try
             {
+                if (!NoFieldsAreNull(parameter))
+                {
+                    throw new Exception("Please make sure to fill out all fields.");
+                }
                 UserManager.LoggedInUser = new UserManager().FindUser(Email, clearTextPassword);
                 IsAuthenticated = UserManager.IsUserLoggedIn();
 
@@ -51,7 +62,16 @@ namespace WindowsAppEngG01.ViewModels
             } catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
+                Feedback = e.Message;
+
+                Email = string.Empty;
+                passwordBox.Password = string.Empty;
             }
+        }
+
+        private bool NoFieldsAreNull(object parameter)
+        {
+            return !String.IsNullOrEmpty(Email) && !String.IsNullOrEmpty(((PasswordBox)parameter).Password);
         }
 
         public bool CanLogin(object parameter)

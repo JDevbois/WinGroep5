@@ -19,6 +19,7 @@ namespace WindowsAppEngG01.ViewModels
         private List<Company> _companies;
         private Company _selectedCompany;
         private bool _companySelected;
+        private string _feedback;
 
         public DelegateCommand AddCompanyCommand { get; set; }
         public DelegateCommand DeleteCompanyCommand { get; set; }
@@ -26,6 +27,12 @@ namespace WindowsAppEngG01.ViewModels
         public DelegateCommand EditPromotionCommand { get; set; }
         public DelegateCommand EditEventCommand { get; set; }
         public DelegateCommand EditDiscountCouponCommand { get; set; }
+
+        public String Feedback
+        {
+            get { return _feedback; }
+            set { _feedback = value; NotifyPropertyChanged(nameof(Feedback)); }
+        }
 
         public List<Company> Companies
         {
@@ -105,8 +112,25 @@ namespace WindowsAppEngG01.ViewModels
 
         private void SaveChanges(object parameter)
         {
-            new CompanyManager().UpdateCompany((Company)parameter);
-            ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(DashboardPage));
+            try
+            {
+                if (!NoFieldsAreEmpty())
+                {
+                    throw new Exception("Please make sure no fields are empty.");
+                }
+                new CompanyManager().UpdateCompany((Company)parameter);
+                ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(DashboardPage));
+            } catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                Feedback = e.Message;
+            }
+        }
+
+        private bool NoFieldsAreEmpty()
+        {
+            return !String.IsNullOrEmpty(SelectedCompany.City) && !String.IsNullOrEmpty(SelectedCompany.Name) && !String.IsNullOrEmpty(SelectedCompany.Number) && !String.IsNullOrEmpty(SelectedCompany.OpeningHours) && !String.IsNullOrEmpty(SelectedCompany.PostalCode)
+                && !String.IsNullOrEmpty(SelectedCompany.Street) && !String.IsNullOrEmpty(SelectedCompany.Type) && !String.IsNullOrEmpty(SelectedCompany.Website);
         }
 
         private void EditPromotion(object parameter)
