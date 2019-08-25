@@ -121,9 +121,17 @@
     <Compile Include="Migrations\201908251650468_InitialCreate.Designer.cs">
       <DependentUpon>201908251650468_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908251847087_Initial1.cs" />
+    <Compile Include="Migrations\201908251847087_Initial1.Designer.cs">
+      <DependentUpon>201908251847087_Initial1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BackendAPIContext.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\DiscountCoupon.cs" />
+    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\Promotion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908251650468_InitialCreate.resx">
       <DependentUpon>201908251650468_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908251847087_Initial1.resx">
+      <DependentUpon>201908251847087_Initial1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
