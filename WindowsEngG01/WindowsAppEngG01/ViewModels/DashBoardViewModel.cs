@@ -88,7 +88,7 @@ namespace WindowsAppEngG01.ViewModels
 
         private void DeleteCompany(object parameter)
         {
-            CompanyManager.DeleteCompany(SelectedCompany.Id);
+            CompanyManager.DeleteCompanyAsync(SelectedCompany.Id);
             ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(DashboardPage));
         }
 
@@ -118,7 +118,7 @@ namespace WindowsAppEngG01.ViewModels
                 {
                     throw new Exception("Please make sure no fields are empty.");
                 }
-                new CompanyManager().UpdateCompany((Company)parameter);
+                new CompanyManager().UpdateCompanyAsync((Company)parameter);
                 ((Window.Current.Content as Frame)?.Content as MainPage)?.contentFrame.Navigate(typeof(DashboardPage));
             } catch (Exception e)
             {

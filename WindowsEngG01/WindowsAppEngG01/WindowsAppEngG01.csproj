@@ -129,6 +129,7 @@
     <Compile Include="Utils\EditPromotionPassThroughElement.cs" />
     <Compile Include="Utils\ListExtensions.cs" />
     <Compile Include="Utils\AddPromotionPassThroughElement.cs" />
+    <Compile Include="Utils\UseBackend.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\CompanyDetails.cs" />
     <Compile Include="ViewModels\DashBoardViewModel.cs" />
