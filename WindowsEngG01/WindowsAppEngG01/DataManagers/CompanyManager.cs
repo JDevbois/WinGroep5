@@ -263,8 +263,7 @@ namespace WindowsAppEngG01.DataManagers
             }
             if (hasPromotionsFilter)
             {
-                //TODO filter by date (promotions only after current date)
-                result = result.Where(c => c.Promotions.Count > 0 || c.Events.Count > 0).ToList();
+                result = result.Where(c => c.Promotions.Count > 0 || c.Events.Count > 0 || c.DiscountCoupons.Count > 0).ToList();
             }
             return result;
         }
