@@ -9,10 +9,38 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="Sizes">
+                <VisualState x:Name="Large">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1004"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Medium">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Small">
+                    <VisualState.Setters>
+                        <Setter Target="lblSearch.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="txtName.(FrameworkElement.Width)" Value="NaN"/>
+                        <Setter Target="txtName.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="txtName.(TextBox.PlaceholderText)" Value="Name of the company"/>
+                        <Setter Target="textBlock.(TextBlock.Text)" Value="By Type"/>
+                        <Setter Target="comboBox.(FrameworkElement.Width)" Value="NaN"/>
+                        <Setter Target="comboBox.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="comboBox.(FrameworkElement.HorizontalAlignment)" Value="Stretch"/>
+                        <Setter Target="textBlock1.(TextBlock.Text)" Value="Only Promotions"/>
+                        <Setter Target="lblSearch.(TextBlock.Text)" Value="Search"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -22,16 +50,16 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Text="Search For Companies" FontSize="30sp" Margin="10, 0, 0, 10" HorizontalAlignment="Center" Padding="20" />
+        <TextBlock x:Name="lblSearch" Grid.Column="0" Grid.ColumnSpan="3" Text="Search For Companies" FontSize="30sp" Margin="10, 0, 0, 10" HorizontalAlignment="Center" Padding="20" />
         <TextBlock Grid.Column="0" Grid.Row="1" Text="By Name" Margin="10, 0, 0, 10" />
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="By Type Of Company" Margin="10, 0, 0, 10" />
-        <TextBlock Grid.Column="0" Grid.Row="3" Text="Only Companies With Running Promotions" Margin="10, 5, 0, 10" />
+        <TextBlock x:Name="textBlock" Grid.Column="0" Grid.Row="2" Text="By Type Of Company" Margin="10, 0, 0, 10" />
+        <TextBlock x:Name="textBlock1" Grid.Column="0" Grid.Row="3" Text="Only Companies With Running Promotions" Margin="10, 5, 0, 10" />
 
-        <TextBox Grid.Column="1" Grid.Row="1" Margin="10, 0, 0, 10"
-                 PlaceholderText="Enter name of the company here..." Width="500"
+        <TextBox x:Name="txtName" Grid.Column="1" Grid.Row="1" Margin="10, 0, 0, 10"
+                 PlaceholderText="Enter name of the company here..." Width="480"
                  Text="{Binding NameFilter, Mode=TwoWay}"/>
-        <ComboBox Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 10"
-                  PlaceholderText="Type" HorizontalAlignment="Right" Width="500"
+        <ComboBox x:Name="comboBox" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 10"
+                  PlaceholderText="Type" HorizontalAlignment="Right" Width="485"
                   ItemsSource="{Binding AllowedTypes, Mode=TwoWay}"
                   SelectedValue="{Binding TypeFilter, Mode=TwoWay}"/>
         <CheckBox Grid.Column="1" Grid.Row="3" Margin="10, 0, 0, 10"

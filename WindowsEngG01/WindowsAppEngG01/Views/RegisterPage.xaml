@@ -9,6 +9,109 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Margin="20">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="Sizes">
+                <VisualState x:Name="Large">
+                    <VisualState.Setters>
+                        <Setter Target="txtFirstName.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,10</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="txtStreet.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,10</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="txtPostalCode.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,10</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="txtPassword.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,10</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1004"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Medium">
+                    <VisualState.Setters>
+                        <Setter Target="btnRegister.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="textBlock.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="txtFirstName.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,10</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="txtStreet.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,10</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="txtPostalCode.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,10</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="txtPassword.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,10</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Small">
+                    <VisualState.Setters>
+                        <Setter Target="btnRegister.(Grid.Column)" Value="3"/>
+                        <Setter Target="txtPasswordConfirm.(Grid.Column)" Value="3"/>
+                        <Setter Target="txtPassword.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="txtCity.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="txtCity.(Grid.Column)" Value="3"/>
+                        <Setter Target="txtPostalCode.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="txtNumber.(Grid.Column)" Value="3"/>
+                        <Setter Target="txtStreet.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="txtLastName.(Grid.Column)" Value="3"/>
+                        <Setter Target="txtFirstName.(Grid.Column)" Value="1"/>
+                        <Setter Target="txtFirstName.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="txtEmail.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target="txtFirstName.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,10</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="txtStreet.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,10</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="txtPostalCode.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,10</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="txtPassword.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,10</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="txtPasswordConfirm.(PasswordBox.PlaceholderText)" Value="Confirm"/>
+                        <Setter Target="txtLastName.(TextBox.PlaceholderText)" Value="Last"/>
+                        <Setter Target="textBlock1.(TextBlock.Text)" Value="E-mail"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -19,21 +122,21 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="400" />
-            <ColumnDefinition Width="400" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Register" Grid.Row="0" HorizontalAlignment="Center" Grid.ColumnSpan="4" FontSize="30sp" Padding="20" />
+        <TextBlock x:Name="lblTitle" Text="Register" Grid.Row="0" HorizontalAlignment="Left" Grid.ColumnSpan="4" FontSize="30sp" Padding="20" />
 
-        <TextBlock Text="E-mail address" Grid.Row="1" Grid.Column="0" />
+        <TextBlock x:Name="textBlock1" Text="E-mail address" Grid.Row="1" Grid.Column="0" />
         <TextBox x:Name="txtEmail" Text="{Binding Email, Mode=TwoWay}" PlaceholderText="E-mail" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0, 0, 10" />
 
         <TextBlock Text="Name" Grid.Row="2" Grid.Column="0" />
         <TextBox x:Name="txtFirstName" Text="{Binding FirstName, Mode=TwoWay}" PlaceholderText="First Name" Grid.Row="2" Grid.Column="1" Margin="0,0, 0, 10" />
         <TextBox x:Name="txtLastName" Text="{Binding LastName, Mode=TwoWay}" PlaceholderText="Last Name" Grid.Row="2" Grid.Column="2" Margin="0,0, 0, 10" />
-        
+
         <TextBlock Text="Address" Grid.Row="3" Grid.Column="0" />
         <TextBox x:Name="txtStreet" Text="{Binding Street, Mode=TwoWay}" PlaceholderText="Street" Grid.Row="3" Grid.Column="1" Margin="0,0, 0, 10" />
         <TextBox x:Name="txtNumber" Text="{Binding Number, Mode=TwoWay}" PlaceholderText="Number" Grid.Row="3" Grid.Column="2" Margin="0,0, 0, 10" />
@@ -43,7 +146,7 @@
         <TextBlock Text="Password" Grid.Row="5" Grid.Column="0" />
         <PasswordBox x:Name="txtPassword" Password="{Binding Password, Mode=TwoWay}" PlaceholderText="Password" Grid.Row="5" Grid.Column="1" Margin="0,0, 0, 10" />
         <PasswordBox x:Name="txtPasswordConfirm" Password="{Binding PasswordConfirm, Mode=TwoWay}" PlaceholderText="Confirm Password" Grid.Row="5" Grid.Column="2" Margin="0,0, 0, 10" />
-        <Button x:Name="btnRegister" Command="{Binding RegisterCommand}" Grid.Row="5" Grid.Column="3" Content="Register" HorizontalAlignment="Right" />
-        <TextBlock Text="{Binding Feedback}" Margin="10" Foreground="IndianRed" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.ColumnSpan="3" Grid.Row="6" />
+        <Button x:Name="btnRegister" Command="{Binding RegisterCommand}" Grid.Row="6" Grid.Column="2" Content="Register" HorizontalAlignment="Right" VerticalAlignment="Top" />
+        <TextBlock x:Name="textBlock" Text="{Binding Feedback}" Margin="10" Foreground="IndianRed" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.ColumnSpan="3" Grid.Row="6" />
     </Grid>
 </Page>

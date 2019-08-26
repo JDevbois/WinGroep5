@@ -8,7 +8,28 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel Height="500">
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30">You are not logged in, this feature is only available to logged in users.</TextBlock>
+    <StackPanel x:Name="stackPanel" Height="500">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="Sizes">
+                <VisualState x:Name="Large">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1004"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Medium">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Small">
+                    <VisualState.Setters>
+                        <Setter Target="lblNotLoggedIn.(TextBlock.TextWrapping)" Value="WrapWholeWords"/>
+                        <Setter Target="stackPanel.(FrameworkElement.VerticalAlignment)" Value="Center"/>
+                        <Setter Target="stackPanel.(FrameworkElement.Height)" Value="NaN"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <TextBlock x:Name="lblNotLoggedIn" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30">You are not logged in, this feature is only available to logged in users.</TextBlock>
     </StackPanel>
 </Page>
