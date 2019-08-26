@@ -13,6 +13,21 @@
         <util:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
     </Page.Resources>
     <Hub Header="Dashboard">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="Sizes">
+                <VisualState x:Name="Large">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1004"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Medium">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Mobile"/>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <HubSection MinWidth="250" Header="Your Companies">
             <DataTemplate>
                 <ScrollViewer>
