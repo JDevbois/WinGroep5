@@ -19,29 +19,52 @@ namespace WindowsAppEngG01.DataManagers
                 {
                     UserId = "1",
                     IsSpotlighted = true,
-                    Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
-                    Name = "HOGENT"
+                    Logo = new Uri("https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Nieuw_logo_Hogent_2018.jpg/266px-Nieuw_logo_Hogent_2018.jpg"),
+                    Name = "HOGENT",
+                    Street = "Valentin Vaerwyckweg",
+                    Number = "1",
+                    City = "Gent",
+                    PostalCode = "9000",
+                    Type = "School",
+                    Website = "http://www.hogent.be"
                 },
                 new Company
                 {
                     UserId = "2",
                     IsSpotlighted = true,
-                    Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
-                    Name = "UGent"
+                    Logo = new Uri("https://iomics.ugent.be/secrify/images/ugent-logo.png"),
+                    Name = "UGent",
+                    Street = "St Pieters Nieuwstraat",
+                    Number = "33",
+                    City = "Gent",
+                    PostalCode = "9000",
+                    Type = "School",
+                    Website = "http://www.ugent.be"
                 },
                 new Company
                 {
                     UserId = "3",
                     IsSpotlighted = false,
-                    Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
-                    Name = "Jos's Delhi"
+                    Logo = new Uri("http://www.flanderstoday.eu/sites/default/files/webimages/ft360-biz_nightshop.jpg"),
+                    Name = "Jos's Delhi",
+                    Street = "Valentin Vaerwyckweg",
+                    Number = "2",
+                    City = "Gent",
+                    PostalCode = "9000",
+                    Type = "Night Shop"
                 },
                 new Company
                 {
                     UserId = "1",
                     IsSpotlighted = false,
-                    Logo = new Uri("https://img.freepik.com/free-vector/santa-clause-in-costume-carrying-sack_1262-15966.jpg?size=338&ext=jpg"),
-                    Name = "Heimdal"
+                    Logo = new Uri("https://heimdal.xcdn.eu/wp-content/uploads/2018/03/HeimdalH-150x150.png"),
+                    Name = "Heimdal",
+                    Street = "Achilles Musschestraat",
+                    Number = "69",
+                    City = "Gent",
+                    PostalCode = "9000",
+                    Type = "Other",
+                    Website = "http://wwww.heimdal.be"
                 }
             };
 
